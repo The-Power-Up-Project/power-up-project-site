@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+}
+
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 0.5vh solid #FF4040;
+  background-color: white;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#navbar a {
+  text-decoration: none;
+  color: #181818;
+  font-size: 1.3rem;
+  padding: 0 14px 0 14px;
+  transition: 0.2s all;
+}
+
+#navbar a:hover {
+  color: #FF4040;
+}
+
+#nav-logo {
+  height: 55px;
+}
