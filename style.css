@@ -1,32 +1,128 @@
 body {
   margin: 0;
+  font-family: Kufan;
 }
 
 #navbar {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  border-bottom: 0.5vh solid #FF4040;
-  background-color: white;
-  height: 65px;
+  height: 9vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.2s all;
 }
 
 #navbar a {
+  display:flex;
+  align-items: center;
   text-decoration: none;
-  color: #181818;
-  font-size: 1.3rem;
-  padding: 0 14px 0 14px;
+  font-size: 2.8vh;
+  height: 9vh;
+  margin: 0 1vw;
   transition: 0.2s all;
 }
 
 #navbar a:hover {
-  color: #FF4040;
+  color: #468DAB;
+}
+
+#phrase-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-image-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#who-container {
+  background-color: #000f6e;
+}
+
+.text-image-container > div {
+  width: 100%;
+  padding: 20vh 6vw 10vh 6vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-image-container.dark {
+  color: white;
+}
+
+.text-image-container.light {
+  color: #000f63;
+}
+
+.text-image-container > div > h1 {
+  font-weight: normal;
+  font-size: 4.5vh;
+  margin: 0 0 3vh 0;
+}
+
+.text-image-container > div > p {
+  font-weight: lighter;
+  font-size: 3vh;
+  margin: 0;
+}
+
+.text-image-container > div > img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.page {
+  width: 100%;
+  height: 100vh;
+  background-color: #EFEFEF;
+}
+
+#phrase-logo {
+  height: 40vh;
+}
+
+#phrase-text {
+  margin: 0;
+  color: #000f6e;
+  font-size: 6vh;
+  font-weight: normal;
 }
 
 #nav-logo {
   height: 55px;
+}
+
+#navbar.light {
+  background-color: #efefef;
+  border-bottom: 0.5vh solid #0027ff;
+  box-shadow: 0 4px 20px -10px white;
+}
+
+#navbar.light > a {
+  color: #000f63;
+}
+
+#navbar.dark {
+  background-color: #000f63;
+  border-bottom: 0.5vh solid white;
+  box-shadow: 0 4px 16px -10px black;
+}
+
+#navbar.dark > a {
+  color: #efefef;
+}
+
+.page.dark {
+  background-color: #000f63;
+}
+
+.page.light {
+  background-color: #efefef;
 }
