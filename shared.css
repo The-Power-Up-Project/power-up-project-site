@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "Selawik";
+  src: url("../selawk.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Selawik";
+  src: url("../selawksb.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Selawik";
+  src: url("../selawksl.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Selawik";
+  src: url("../selawkl.ttf") format("truetype");
+  font-weight: 100;
+}
+
+body {
+  margin: 0;
+  background: #efefef;
+  font-family: "Selawik";
+}
+
+
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 9vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s all;
+}
+
+#navbar a {
+  display:flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 2.8vh;
+  height: 9vh;
+  margin: 0 1vw;
+  transition: 0.2s all;
+}
+
+#navbar a:hover {
+  color: #468DAB;
+}
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #EFEFEF;
+}
+
+#nav-logo {
+  height: 7.5vh;
+}
+
+#navbar.light {
+  background-color: #efefef;
+  border-bottom: 0.5vh solid #0027ff;
+  box-shadow: 0 4px 20px -10px white;
+}
+
+#navbar.light > a {
+  color: #0096C7;
+}
+
+#navbar.dark {
+  background-color: #0096C7;
+  border-bottom: 0.5vh solid white;
+  box-shadow: 0 4px 16px -10px black;
+}
+
+#navbar.dark > a {
+  color: #efefef;
+}
+
+.unbounded {
+  min-height: auto;
+  width: auto;
+}
+
+.page.dark {
+  background-color: #0096C7;
+}
+
+.page.light {
+  background-color: #efefef;
+}
+
+@media (orientation: portrait) {
+  #navbar a {
+    font-size: 2.2vh;
+  }
+
+  #nav-logo {
+    height: 5.5vh;
+  }
+}
