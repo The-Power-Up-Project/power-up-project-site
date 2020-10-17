@@ -1,33 +1,3 @@
-body {
-  margin: 0;
-  font-family: Kufan;
-}
-
-#navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 9vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.2s all;
-}
-
-#navbar a {
-  display:flex;
-  align-items: center;
-  text-decoration: none;
-  font-size: 2.8vh;
-  height: 9vh;
-  margin: 0 1vw;
-  transition: 0.2s all;
-}
-
-#navbar a:hover {
-  color: #468DAB;
-}
-
 #phrase-container {
   display: flex;
   flex-direction: column;
@@ -41,11 +11,10 @@ body {
 }
 
 #who-container {
-  background-color: #000f6e;
+  background-color: #0096C7;
 }
 
 .text-image-container > div {
-  width: 100%;
   padding: 20vh 6vw 10vh 6vw;
   display: flex;
   flex-direction: column;
@@ -58,71 +27,70 @@ body {
 }
 
 .text-image-container.light {
-  color: #000f63;
+  color: #0096C7;
 }
 
 .text-image-container > div > h1 {
-  font-weight: normal;
   font-size: 4.5vh;
   margin: 0 0 3vh 0;
 }
 
 .text-image-container > div > p {
-  font-weight: lighter;
+  font-family: Selawik;
   font-size: 3vh;
   margin: 0;
+  font-weight: 100;
 }
 
 .text-image-container > div > img {
   width: 100%;
-  border-radius: 12px;
-}
-
-.page {
-  width: 100%;
-  height: 100vh;
-  background-color: #EFEFEF;
+  border-radius: 2vh;
 }
 
 #phrase-logo {
-  height: 40vh;
+  height: 33vh;
 }
 
 #phrase-text {
-  margin: 0;
-  color: #000f6e;
-  font-size: 6vh;
+  margin: 2vh 0 0 0;
+  color: #333333;
+  font-size: 5.5vh;
   font-weight: normal;
+  text-align: center;
 }
 
-#nav-logo {
-  height: 7.5vh;
-}
+@media (orientation: portrait) {
+  #who-container {
+    flex-direction: column;
+  }
 
-#navbar.light {
-  background-color: #efefef;
-  border-bottom: 0.5vh solid #0027ff;
-  box-shadow: 0 4px 20px -10px white;
-}
+  #what-container {
+    flex-direction: column-reverse;
+  }
 
-#navbar.light > a {
-  color: #000f63;
-}
+  .text-image-container > div {
+    padding: 1vh 6vw 6vh 6vw;
+  }
 
-#navbar.dark {
-  background-color: #000f63;
-  border-bottom: 0.5vh solid white;
-  box-shadow: 0 4px 16px -10px black;
-}
+  #who-container > div:first-child {
+    padding-top: 14vh;
+  }
 
-#navbar.dark > a {
-  color: #efefef;
-}
+  #what-container > div:last-child {
+    padding-top: 14vh;
+  }
 
-.page.dark {
-  background-color: #000f63;
-}
+  #phrase-logo {
+    height: auto;
+    width: 80%;
+  }
 
-.page.light {
-  background-color: #efefef;
+  .text-image-container > div > p {
+    font-size: 2.7vh;
+  }
+
+  #phrase-text {
+    font-size: 4vh;
+    margin-top: 3vh;
+  }
 }

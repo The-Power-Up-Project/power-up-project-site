@@ -1,0 +1,29 @@
+#faq-container {
+  margin: 9.5vh 20vw 0 20vw;;
+}
+
+#faq-header {
+  font-family: Selawik;
+  font-size: 7vh;
+  font-weight: 600;
+  color: #0096C7;
+  padding: 5vh 0 0 0;
+  display: inline-block;
+}
+
+#qas > div > p {
+  font-family: Selawik;
+  color: #333;
+  margin: 0;
+  margin-top: 2vh;
+}
+
+#qas > div > p:first-child {
+  font-size: 3vh;
+  font-weight: 600;
+}
+
+#qas > div > p:last-child, ul {
+  font-size: 2vh;
+  margin-left: 2vw;
+}
