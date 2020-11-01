@@ -38,6 +38,9 @@ body {
   justify-content: center;
   align-items: center;
   transition: 0.2s all;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  z-index: 5;
 }
 
 #navbar a {
@@ -55,7 +58,6 @@ body {
 }
 
 .page {
-  width: 100%;
   min-height: 100vh;
   background-color: #EFEFEF;
 }
@@ -66,7 +68,7 @@ body {
 
 #navbar.light {
   background-color: #efefef;
-  border-bottom: 0.5vh solid #0027ff;
+  border-bottom: 0.5vh solid #0072ff;
   box-shadow: 0 4px 20px -10px white;
 }
 
@@ -95,6 +97,37 @@ body {
 
 .page.light {
   background-color: #efefef;
+}
+
+#footer {
+  height: 10vh;
+  background: #333;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+#footer img {
+  height: 4vh;
+  margin: 0 0.5vw;
+}
+
+#copyright, #social-container, #email {
+  margin: 0 5vw;
+  font-size: 2vh;
+}
+
+#social-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#email {
+  color: white;
 }
 
 @media (orientation: portrait) {

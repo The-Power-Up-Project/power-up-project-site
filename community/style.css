@@ -1,0 +1,159 @@
+#leadership-header, #partners-header {
+  font-family: Selawik;
+  font-size: 7vh;
+  font-weight: 600;
+  color: #0096C7;
+  margin: 14.5vh 0 2vh 0;
+  display: block;
+}
+
+#partners-header {
+  margin-top: 6vh;
+}
+
+#community-container, #partners-container {
+  margin: 0 20vw 0 20vw;
+}
+
+.leadership-subheader {
+  font-family: Selawik;
+  font-size: 5vh;
+  font-weight: 600;
+  color: white;
+  padding: ;
+  display: block;
+  width: 100%;
+  margin: 3vh 0;
+  text-shadow: 0 0 10px #333;
+}
+
+.leader-list {
+  padding-left: 4vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%
+}
+
+.leader-list > div {
+  background-color: white;
+  border-radius: 2vh;
+  width: 75%;
+  margin-bottom: 2vh;
+  padding: 5vh 3vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; 
+  align-items: center;
+}
+
+.image {
+  height: 20vh;
+  width: 20vh;
+  margin-right: 3vw;
+  border-radius: 50%;
+  background-position-y: center;
+  background-size: cover;
+}
+
+.text {
+  font-family: Selawik;
+  color: #333;
+}
+
+.text > p {
+  margin: 0.1vh 0;
+}
+
+.name {
+  font-size: 3vh;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 2.5vh;
+}
+
+.education, .graduation {
+  font-size: 2vh;
+}
+
+#eric-chen {
+  background-image: url("../images/eric_chen.jpg")
+}
+
+#jimit {
+  background-image: url("../images/jimit.png")
+}
+
+#nicolas {
+  background-image: url("../images/nicolas.jpg")
+}
+
+#kevin {
+  background-image: url("../images/kevin.jpg")
+}
+
+#ivan {
+  background-image: url("../images/ivan.jpg")
+}
+
+#timothy {
+  background-image: url("../images/timothy.jpg")
+}
+
+#carl {
+  background-image: url("../images/carl.jpg")
+}
+
+#eric-li {
+  background-image: url("../images/eric_li.jpg")
+}
+
+#ojai {
+  background-image: url("../images/ca.jpg");
+  background-attachment: fixed;
+}
+
+#executive-staff {
+  background-image: url("../images/exec.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  border-top-left-radius: 2vh;
+  border-top-right-radius: 2vh;
+}
+
+#eagan {
+  background-image: url("../images/mn.jpg");
+  background-attachment: fixed;
+  margin-bottom: 4vh;
+  border-bottom-left-radius: 2vh;
+  border-bottom-right-radius: 2vh;
+}
+
+#partners-container > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#partners-container > div > div {
+  background-color: white;
+  border-radius: 2vh;
+  padding: 5vh 3vw;
+  width: 75%;
+  margin-bottom: 2vh;
+}
+
+#partners-container > div > div > img {
+  height: 15vh;
+}
+
+#partners-container > div > div > p {
+  font-size: 3vh;
+  color: #333;
+  margin: 1vh 0;
+  font-family: Selawik
+}

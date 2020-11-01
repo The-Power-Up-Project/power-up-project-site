@@ -2,7 +2,7 @@
   font-size: 5vh;
   font-weight: 600;
   color: #0096C7;
-  margin: 5vh 0 0 0;
+  margin: 14.5vh 0 0 0;
   display: inline-block;
 }
 
@@ -14,7 +14,7 @@
 }
 
 #contact-form-container {
-  margin: 9.5vh 20vw 0 20vw;;
+  margin: 0 15vw 0 15vw;
 }
 
 #contact-form {
@@ -49,7 +49,7 @@
 
 @media (orientation: portrait) {
   #contact-form-container {
-    margin: 9.5vh 7vw 0 7vw;
+    margin: 0 7vw 0 7vw;
   }
 
   #contact-form > input, select, textarea {
