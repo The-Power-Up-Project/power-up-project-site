@@ -3,6 +3,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-image: url("./images/hero.jpg");
+  background-attachment: fixed;
 }
 
 .text-image-container {
@@ -48,15 +50,19 @@
 }
 
 #phrase-logo {
-  height: 33vh;
+  height: 30vh;
+  padding: 2vh 1vw;
+  border-radius: 2vh;
+  background-color: #0096C7;
 }
 
 #phrase-text {
   margin: 2vh 0 0 0;
-  color: #333333;
+  color: white;
   font-size: 5.5vh;
   font-weight: normal;
   text-align: center;
+  text-shadow: 0 0 10px #333
 }
 
 @media (orientation: portrait) {
