@@ -5,6 +5,7 @@
   justify-content: center;
   background-image: url("./images/hero.jpg");
   background-attachment: fixed;
+  background-size: cover;
 }
 
 .text-image-container {
