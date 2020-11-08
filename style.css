@@ -50,6 +50,10 @@
   border-radius: 2vh;
 }
 
+.img-container {
+  min-width: 40%;
+}
+
 #phrase-logo {
   height: 30vh;
   padding: 2vh 1vw;
