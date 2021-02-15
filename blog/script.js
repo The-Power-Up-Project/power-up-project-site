@@ -28,6 +28,7 @@ function createPost(posts, i) {
   postElement.appendChild(dateElement)
   postElement.appendChild(contentsElement)
   postList.appendChild(postElement)
+  window.scrollTo(0, 0)
 }
 
 function createPosts(posts) {
