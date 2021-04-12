@@ -49,7 +49,7 @@ function createPosts(posts) {
       contentElement.appendChild(imageElement)
     }
     const textElement = document.createElement("p")
-    textElement.innerText = posts[i].content.replace(/(?<=.)({{\d}})/g, "\n\n").replace(/({{\d}})/g, "").slice(0, 247) + "..."
+    textElement.innerHTML = posts[i].content.replace(/(?<=.)({{\d}})/g, "\n\n").replace(/({{\d}})/g, "").slice(0, 247) + "..."
     contentElement.appendChild(textElement)
     postElement.appendChild(titleElement)
     postElement.appendChild(dateElement)
