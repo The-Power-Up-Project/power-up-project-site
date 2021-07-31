@@ -79,44 +79,44 @@
 }
 
 #eric-chen {
-  background-image: url("../images/eric_chen.jpg")
+  background-image: url("../images/eric_chen-min.jpg")
 }
 
 #jimit {
-  background-image: url("../images/jimit.png")
+  background-image: url("../images/jimit-min.jpg")
 }
 
 #nicolas {
-  background-image: url("../images/nicolas.jpg")
+  background-image: url("../images/nicolas-min.jpg")
 }
 
 #kevin {
-  background-image: url("../images/kevin.jpg")
+  background-image: url("../images/kevin-min.jpg")
 }
 
 #ivan {
-  background-image: url("../images/ivan.jpg")
+  background-image: url("../images/ivan-min.jpg")
 }
 
 #timothy {
-  background-image: url("../images/timothy.jpg")
+  background-image: url("../images/timothy-min.jpg")
 }
 
 #carl {
-  background-image: url("../images/carl.jpg")
+  background-image: url("../images/carl-min.jpg")
 }
 
 #eric-li {
-  background-image: url("../images/eric_li.jpg")
+  background-image: url("../images/eric_li-min.jpg")
 }
 
 #ojai {
-  background-image: url("../images/ca.jpg");
+  background-image: url("../images/ca-min.jpg");
   background-attachment: fixed;
 }
 
 #executive-staff {
-  background-image: url("../images/exec.jpg");
+  background-image: url("../images/exec-min.jpg");
   background-attachment: fixed;
   background-size: cover;
   border-top-left-radius: 2vh;
@@ -124,7 +124,7 @@
 }
 
 #eagan {
-  background-image: url("../images/mn.jpg");
+  background-image: url("../images/mn-min.jpg");
   background-attachment: fixed;
   margin-bottom: 4vh;
   border-bottom-left-radius: 2vh;
