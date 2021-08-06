@@ -78,6 +78,10 @@
   font-size: 2vh;
 }
 
+.silhouette {
+  background-image: url("../images/silhouette.jpg")
+}
+
 #eric-chen {
   background-image: url("../images/eric_chen-min.jpg")
 }
@@ -94,10 +98,6 @@
   background-image: url("../images/kevin-min.jpg")
 }
 
-#ivan {
-  background-image: url("../images/ivan-min.jpg")
-}
-
 #timothy {
   background-image: url("../images/timothy-min.jpg")
 }
@@ -108,11 +108,6 @@
 
 #eric-li {
   background-image: url("../images/eric_li-min.jpg")
-}
-
-#ojai {
-  background-image: url("../images/ca-min.jpg");
-  background-attachment: fixed;
 }
 
 #executive-staff {
