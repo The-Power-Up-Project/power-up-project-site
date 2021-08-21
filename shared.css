@@ -22,12 +22,20 @@
   font-weight: 100;
 }
 
+html {
+  width: 100%;
+}
+
 body {
   margin: 0;
+  width: 100%;
   background: #efefef;
   font-family: "Selawik";
 }
 
+* {
+  box-sizing: border-box;
+}
 
 #navbar {
   position: fixed;
@@ -132,10 +140,20 @@ body {
 
 @media (orientation: portrait) {
   #navbar a {
-    font-size: 2.2vh;
+    font-size: 2.05vh;
   }
 
   #nav-logo {
     height: 5.5vh;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  #footer {
+    flex-direction: column;
+  }
+
+  #copyright {
+    display: none;
   }
 }
