@@ -7,7 +7,7 @@
   font-size: 7vh;
   font-weight: 600;
   color: #0096C7;
-  padding: 14.5vh 0 0 0;
+  padding: 10vh 0 0 0;
   display: inline-block;
 }
 
@@ -30,7 +30,7 @@
 
 @media (orientation: portrait) {
   #faq-container {
-    margin: 9.5vh 7vw 0 7vw;
+    margin: 0 7vw;
   }
 }
 

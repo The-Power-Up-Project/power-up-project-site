@@ -6,6 +6,7 @@
   background-image: url("./images/hero-min.jpg");
   background-attachment: fixed;
   background-size: cover;
+  background-position-x: center;
 }
 
 .text-image-container {
