@@ -28,6 +28,27 @@
   background-color: #0096C7;
 }
 
+#join-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0096C7;
+}
+
+#join-button {
+  background-color: white;
+  border-radius: 2vh;
+  padding: 25px 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #0096C7;
+  text-decoration: none;
+  margin: 50px 0;
+}
+
 .text-image-container > div {
   padding: 20vh 6vw 10vh 6vw;
   display: flex;
