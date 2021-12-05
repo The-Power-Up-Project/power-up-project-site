@@ -163,6 +163,7 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  margin-bottom: 4vh;
 }
 
 #partners-container > div > div {
