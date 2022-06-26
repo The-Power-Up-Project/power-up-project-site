@@ -145,17 +145,12 @@ body, html {
   border-top-right-radius: 2vh;
 }
 
-#eagan {
-  background-image: url("../images/mn-min.jpg");
+#advisory {
+  background-image: url("../images/advisory.jpg");
   margin-bottom: 4vh;
   background-size: contain;
   border-bottom-left-radius: 2vh;
   border-bottom-right-radius: 2vh;
-}
-
-#advisory {
-  background-image: url("../images/advisory.jpg");
-  background-size: contain;
 }
 
 #partners-container > div {
