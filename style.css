@@ -28,6 +28,19 @@
   background-color: #0096C7;
 }
 
+#instagram-feed-container {
+  margin-left: 13%;
+}
+
+#whitespace {
+  background-color: white;
+  margin-top: 5%;
+}
+
+#recent-container {
+  background-color: #0096C7;
+}
+
 #join-container {
   display: flex;
   flex-direction: column;
