@@ -146,8 +146,20 @@ body, html {
   background-image: url("../images/eric_li-min.jpg")
 }
 
+#kyle {
+  background-image: url("../images/kyle.jpeg")
+}
+
+#lin {
+  background-image: url("../images/lin.jpg")
+}
+
+#jai {
+  background-image: url("../images/jai.jpeg")
+}
+
 #executive-staff {
-  background-image: url("../images/stockpile.jpg");
+  background-image: url("../images/back.jpg");
   background-size: cover;
   border-top-left-radius: 2vh;
   border-top-right-radius: 2vh;

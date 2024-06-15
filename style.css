@@ -22,6 +22,16 @@
 .text-image-container {
   display: flex;
   flex-direction: row;
+  
+}
+
+.text-image-container > div {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20vh 6vw 10vh 6vw;
 }
 
 #who-container {

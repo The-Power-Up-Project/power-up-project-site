@@ -157,3 +157,7 @@ body {
     display: none;
   }
 }
+
+p {
+  line-height: 1.2;
+}
