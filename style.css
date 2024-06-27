@@ -39,7 +39,34 @@
 }
 
 #instagram-feed-container {
-  margin-left: 13%;
+  width: 100%;
+  max-width: 800px; /* Increase this value to make the embed wider */
+  margin: 0 auto;
+}
+
+#instagram-feed-container .instagram-media {
+  max-width: 100% !important;
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+#recent-container {
+  background-color: #0096C7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#instagram-text-container {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+  #instagram-feed-container {
+      max-width: 90%;
+  }
 }
 
 #whitespace {
