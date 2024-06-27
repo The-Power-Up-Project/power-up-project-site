@@ -14,7 +14,16 @@
 }
 
 #donate-form-container {
-  margin: 0 15vw 0 15vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  #donate-form-container {
+      padding: 0 30px;
+  }
 }
 
 #donate-form {
@@ -65,5 +74,10 @@
 
   #submit {
     width: 50% !important;
+  }
+
+  #donate-form-container {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
