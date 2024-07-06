@@ -4,6 +4,8 @@
   color: #0096C7;
   margin: 14.5vh 0 0 0;
   display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 
 #donate-subheader {
@@ -22,7 +24,7 @@
 
 @media (min-width: 768px) {
   #donate-form-container {
-      padding: 0 30px;
+    padding: 0 30px;
   }
 }
 
@@ -37,7 +39,7 @@
   border: 0.25vh solid #0096C7;
   border-radius: 1vh;
   width: 90%;
-  font-size:3vh;
+  font-size: 3vh;
   font-family: Selawik;
   padding: 0.5vh 0.5vw;
   margin: 1.5vh 0;
@@ -49,7 +51,6 @@
   color: white !important;
   width: 30% !important;
 }
-
 
 #donate-form > textarea {
   resize: none;
@@ -79,5 +80,29 @@
   #donate-form-container {
     max-width: 1200px;
     margin: 0 auto;
+  }
+}
+
+/* New styles for the embedded Google Form */
+#donate-form-container iframe {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: none;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 1vh;
+}
+
+@media (min-width: 768px) {
+  #donate-form-container iframe {
+    height: 70vh;
+  }
+}
+
+@media (orientation: portrait) {
+  #donate-form-container iframe {
+    height: 60vh;
   }
 }
