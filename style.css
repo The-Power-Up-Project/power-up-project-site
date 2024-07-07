@@ -5,7 +5,10 @@
   justify-content: center;
   background-attachment: fixed;
   background-size: cover;
-  background-position-x: center;
+  background-position: center;
+  text-align: center;
+  width: 100%;
+  padding: 20vh 6vw;
 }
 
 #phrase-background {
@@ -14,47 +17,52 @@
   left: 0;
   height: 100%;
   width: 100%;
-  z-index:0;
+  z-index: 0;
   filter: brightness(60%);
   object-fit: cover;
 }
 
 .text-image-container {
   display: flex;
-  flex-direction: row;
-  
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
 }
 
 .text-image-container > div {
-  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20vh 6vw 10vh 6vw;
+  padding: 10vh 6vw;
+  text-align: center;
 }
 
-#who-container {
+#who-container,
+#recent-container,
+#join-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: #0096C7;
+  width: 100%;
+  padding: 5vh 6vw;
 }
 
 #instagram-feed-container {
   width: 100%;
   max-width: 800px; /* Increase this value to make the embed wider */
   margin: 0 auto;
+  text-align: center;
 }
 
 #instagram-feed-container .instagram-media {
   max-width: 100% !important;
   width: 100% !important;
   min-width: 100% !important;
-}
-
-#recent-container {
-  background-color: #0096C7;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 #instagram-text-container {
@@ -65,25 +73,13 @@
 
 @media (max-width: 768px) {
   #instagram-feed-container {
-      max-width: 90%;
+    max-width: 90%;
   }
 }
 
 #whitespace {
   background-color: white;
   margin-top: 5%;
-}
-
-#recent-container {
-  background-color: #0096C7;
-}
-
-#join-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #0096C7;
 }
 
 #join-button {
@@ -97,14 +93,7 @@
   color: #0096C7;
   text-decoration: none;
   margin: 50px 0;
-}
-
-.text-image-container > div {
-  padding: 20vh 6vw 10vh 6vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }
 
 .text-image-container.dark {
@@ -118,6 +107,7 @@
 .text-image-container > div > h1 {
   font-size: 4.5vh;
   margin: 0 0 3vh 0;
+  width: 100%;
 }
 
 .text-image-container > div > p {
@@ -125,6 +115,7 @@
   font-size: 3vh;
   margin: 0;
   font-weight: 100;
+  width: 100%;
 }
 
 .text-image-container > div > img {
@@ -134,6 +125,8 @@
 
 .img-container {
   min-width: 40%;
+  display: flex;
+  justify-content: center;
 }
 
 #phrase-logo {
@@ -151,7 +144,40 @@
   font-weight: normal;
   text-align: center;
   z-index: 1;
-  text-shadow: 0 0 10px #333
+  text-shadow: 0 0 10px #333;
+}
+
+@media (max-width: 768px) {
+  .text-image-container > div {
+    width: 100%;
+  }
+
+  #phrase-container {
+    padding: 10vh 3vw;
+  }
+
+  #join-button {
+    width: 80%;
+    padding: 20px 40px;
+    font-size: 1.5em;
+  }
+
+  #phrase-text {
+    font-size: 4.5vh;
+  }
+
+  .text-image-container > div > h1 {
+    font-size: 4vh;
+  }
+
+  .text-image-container > div > p {
+    font-size: 2.5vh;
+  }
+
+  #phrase-logo {
+    height: 20vh;
+    width: 80%;
+  }
 }
 
 @media (orientation: portrait) {

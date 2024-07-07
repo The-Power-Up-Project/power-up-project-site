@@ -52,7 +52,7 @@ body {
 }
 
 #navbar a {
-  display:flex;
+  display: flex;
   align-items: center;
   text-decoration: none;
   font-size: 2.8vh;
@@ -108,13 +108,15 @@ body {
 }
 
 #footer {
-  height: 10vh;
+  height: auto;
+  padding: 2vh 0;
   background: #333;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   color: white;
+  flex-wrap: wrap;
 }
 
 #footer img {
@@ -122,9 +124,13 @@ body {
   margin: 0 0.5vw;
 }
 
-#copyright, #social-container, #email {
-  margin: 0 5vw;
+#copyright,
+#social-container,
+#email,
+#EIN {
+  margin: 1vh 2vw;
   font-size: 2vh;
+  text-align: center;
 }
 
 #social-container {
@@ -146,15 +152,43 @@ body {
   #nav-logo {
     height: 5.5vh;
   }
+
+  #footer {
+    flex-direction: column;
+    height: auto;
+    padding: 3vh 0;
+  }
+
+  #footer img {
+    height: 3vh;
+  }
+
+  #copyright {
+    display: block;
+  }
 }
 
 @media only screen and (max-width: 550px) {
   #footer {
     flex-direction: column;
+    align-items: center;
+    padding: 3vh 0;
+  }
+
+  #footer img {
+    height: 3vh;
+  }
+
+  #copyright,
+  #EIN,
+  #social-container,
+  #email {
+    margin: 1vh 0;
+    font-size: 1.8vh;
   }
 
   #copyright {
-    display: none;
+    display: block;
   }
 }
 
