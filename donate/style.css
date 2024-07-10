@@ -142,6 +142,43 @@
       #donate-form-container iframe {
         height: 60vh;
       }
+      .dropdown {
+        position: relative;
+      display: inline-block;
+    }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #0096C7; /* Blue background color */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    color: #efefef; /* Text color for dropdown items */
+  }
+.dropdown-content a {
+  color: #efefef; /* Text color for dropdown links */
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #005F7F; /* Darker blue on hover */
+}
+
+/* Show dropdown content on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change text color of Impact menu item */
+.dropbtn {
+  color: #efefef; /* White text color */
+}
+
+.dropbtn:hover {
+  color: black; /* Black text color on hover */
+}
     }
   </style>
   <script>
@@ -150,20 +187,6 @@
   </script>
 </head>
 <body>
-  <div id="navbar" class="dark">
-    <a href="../index.html"><img id="nav-logo" src="../images/logo-icon-white.png"></a>
-    <a href="../index.html">Home</a>
-    <a href="../donate/index.html">Donate</a>
-    <a href="../leadership/index.html">Leadership</a>
-    <div class="dropdown">
-      <a href="#" class="dropbtn">Impact</a>
-      <div class="dropdown-content">
-        <a href="../blog/index.html">Blog</a>
-        <a href="../dashboard/index.html">Dashboard</a>
-      </div>
-    </div>
-  </div>
-  
   <div id="donate-form-container" class="page light">
     <h1 id="donate-header">Fill out this form to donate devices!</h1>
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSexNT9PPToPT9RKfan8AAH_CYtm_a1xqfj0CwUjnaBXBldgnw/viewform?embedded=true" width="640" height="1066" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
