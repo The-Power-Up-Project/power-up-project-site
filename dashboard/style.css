@@ -6,9 +6,12 @@ body {
     padding: 0;
 }
 
-#navbar {
-    background-color: #333;
+.blue-white {
+    background-color: #0096C7;
     color: #fff;
+}
+
+#navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,7 +45,7 @@ body {
 }
 
 .dashboard-item {
-    background-color: #f0f0f0;
+    background-color: #fff;
     border-radius: 5px;
     width: calc(50% - 20px);
     margin: 10px;
@@ -63,7 +66,7 @@ body {
 }
 
 #footer {
-    background-color: #333;
+    background-color: #0096C7;
     color: #fff;
     text-align: center;
     padding: 20px 0;
