@@ -3,98 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Power Up Project - Impact Dashboard</title>
+    <title>The Power Up Project</title>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../shared.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add any additional styles specific to this page */
+        body {
+            background-color: #f0f0f0; /* Background color for the entire page */
+            font-family: Arial, sans-serif; /* Font family for the entire page */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styles */
+        #navbar {
+            background-color: #333; /* Navbar background color */
+            color: #fff; /* Navbar text color */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        #navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        #navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        /* Dashboard styles */
+        .dashboard {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .dashboard h2 {
+            color: #0096C7; /* Dashboard section header color */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Table styles */
+        .dashboard table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .dashboard th, .dashboard td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .dashboard th {
+            background-color: #0096C7; /* Table header background color */
+            color: #fff;
+        }
+
+        .dashboard td {
+            background-color: #f0f0f0; /* Table cell background color */
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Impact Dashboard</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Metrics Overview</a></li>
-                    <li><a href="#">Donation Trends</a></li>
-                    <li><a href="#">Sponsors</a></li>
-                    <li><a href="#">Success Stories</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div id="navbar">
+        <a href="../index.html"><img id="nav-logo" src="../images/logo-icon-white.png"></a>
+        <a href="../index.html">Home</a>
+        <a href="../donate/index.html">Donate</a>
+        <a href="../leadership/index.html">Leadership</a>
+        <a href="../blog/index.html">Impact</a>
+    </div>
 
-    <section id="metrics-overview">
-        <div class="container">
-            <h2>Metrics Overview</h2>
-            <div class="metrics">
-                <div class="metric">
-                    <h3>Total Devices Donated</h3>
-                    <p class="value">1000+</p>
-                </div>
-                <div class="metric">
-                    <h3>Environmental Impact</h3>
-                    <p class="value">500 tons of e-waste diverted</p>
-                </div>
-                <div class="metric">
-                    <h3>Computers Refurbished</h3>
-                    <p class="value">700+</p>
-                </div>
-            </div>
+    <div class="container">
+        <h1 id="leadership-header">Leadership</h1>
+        <div id="executive-staff" class="leader-list">
+            <!-- Leadership content here -->
         </div>
-    </section>
 
-    <section id="donation-trends">
-        <div class="container">
-            <h2>Donation Trends Over Time</h2>
-            <div class="chart">
-                <!-- Placeholder for chart (e.g., using Chart.js or other libraries) -->
-                <canvas id="donationChart"></canvas>
-            </div>
+        <h1 id="partners-header">Partners</h1>
+        <div id="partners-container">
+            <!-- Partners content here -->
         </div>
-    </section>
 
-    <section id="sponsors">
-        <div class="container">
-            <h2>Top Sponsors</h2>
-            <div class="sponsor-list">
-                <div class="sponsor">
-                    <img src="sponsor1.jpg" alt="Sponsor 1">
-                    <p>Sponsor 1</p>
-                </div>
-                <div class="sponsor">
-                    <img src="sponsor2.jpg" alt="Sponsor 2">
-                    <p>Sponsor 2</p>
-                </div>
-                <!-- Add more sponsors as needed -->
-            </div>
+        <!-- Dashboard Section -->
+        <div class="dashboard">
+            <h2>Impact Dashboard</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Total Devices Donated</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Computers Refurbished</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Environmental Impact</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Sponsors</td>
+                        <td>0</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
         </div>
-    </section>
+    </div>
 
-    <section id="success-stories">
-        <div class="container">
-            <h2>Success Stories</h2>
-            <div class="success-carousel">
-                <!-- Carousel or grid for success stories -->
-                <div class="story">
-                    <h3>Success Story 1</h3>
-                    <p>Details about the impact and outcome.</p>
-                </div>
-                <div class="story">
-                    <h3>Success Story 2</h3>
-                    <p>Details about the impact and outcome.</p>
-                </div>
-                <!-- Add more success stories as needed -->
-            </div>
+    <div id="footer">
+        <p>© 2023 The Power Up Project, a 501(c)(3) organization</p>
+        <p>EIN: 85-1457486</p>
+        <div id="social-container">
+            <a href="https://www.facebook.com/thepowerupproj/"><img src="../images/facebook.png"></a>
+            <a href="https://www.instagram.com/thepowerupproject/"><img src="../images/instagram.png"></a>
         </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 The Power Up Project, a 501(c)(3) organization</p>
-            <div class="social-links">
-                <a href="#"><img src="facebook.png" alt="Facebook"></a>
-                <a href="#"><img src="instagram.png" alt="Instagram"></a>
-            </div>
-            <p>Contact: <a href="mailto:contact@thepowerupproject.org">contact@thepowerupproject.org</a></p>
-        </div>
-    </footer>
+        <a id="email" href="mailto:thepowerupproj@gmail.com">thepowerupproj@gmail.com</a>
+    </div>
 </body>
 </html>
