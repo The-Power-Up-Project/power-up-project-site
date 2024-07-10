@@ -142,43 +142,6 @@
       #donate-form-container iframe {
         height: 60vh;
       }
-      .dropdown {
-        position: relative;
-      display: inline-block;
-    }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #0096C7; /* Blue background color */
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    color: #efefef; /* Text color for dropdown items */
-  }
-.dropdown-content a {
-  color: #efefef; /* Text color for dropdown links */
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {
-  background-color: #005F7F; /* Darker blue on hover */
-}
-
-/* Show dropdown content on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Change text color of Impact menu item */
-.dropbtn {
-  color: #efefef; /* White text color */
-}
-
-.dropbtn:hover {
-  color: black; /* Black text color on hover */
-}
     }
   </style>
   <script>
