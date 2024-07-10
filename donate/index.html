@@ -1,67 +1,82 @@
-<html>
-  <head>
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link rel="stylesheet" href="../shared.css">
-    <link rel="stylesheet" href="style.css">
-    <title>The Power Up Project</title>
-  </head>
-  <body>
-    <div id="navbar" class="dark">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Power Up Project</title>
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../shared.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Insert your additional CSS here */
+    @font-face {
+      font-family: "Selawik";
+      src: url("../selawk.ttf") format("truetype");
+      font-weight: normal;
+    }
+
+    @font-face {
+      font-family: "Selawik";
+      src: url("../selawksb.ttf") format("truetype");
+      font-weight: 600;
+    }
+
+    @font-face {
+      font-family: "Selawik";
+      src: url("../selawksl.ttf") format("truetype");
+      font-weight: 300;
+    }
+
+    @font-face {
+      font-family: "Selawik";
+      src: url("../selawkl.ttf") format("truetype");
+      font-weight: 100;
+    }
+
+    /* Any other custom styles */
+  </style>
+  <script>
+    // Insert your JavaScript code here
+    // If you have any scripts to include
+  </script>
+</head>
+<body>
+  <div id="navbar" class="dark">
+    <a href="../index.html"><img id="nav-logo" src="../images/logo-icon-white.png"></a>
+    <a href="../index.html">Home</a>
+    <a href="../donate/index.html">Donate</a>
+    <a href="../leadership/index.html">Leadership</a>
+    <a href="../blog/index.html">Impact</a>
+  </div>
+  
+  <div id="donate-form-container" class="page light">
+    <h1 id="donate-header">Fill out this form to donate devices!</h1>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSexNT9PPToPT9RKfan8AAH_CYtm_a1xqfj0CwUjnaBXBldgnw/viewform?embedded=true" width="640" height="1066" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+  </div>
+
+  <div id="navbar" class="dark">
       <a href="../index.html"><img id="nav-logo" src="../images/logo-icon-white.png"></a>
       <a href="../index.html">Home</a>
       <a href="../donate/index.html">Donate</a>
       <a href="../leadership/index.html">Leadership</a>
-      <a href="../blog/index.html">Impact</a>
-    </div>
-    
-    <div id="donate-form-container" class="page light">
-      <h id="donate-header">Fill out this form to donate devices!</h>
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSexNT9PPToPT9RKfan8AAH_CYtm_a1xqfj0CwUjnaBXBldgnw/viewform?embedded=true" width="640" height="1066" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-    </div>
-
-    <div id="donate-form-container" class="page light">
-      <h1 id="donate-header">FAQs</h1>
-      
-        <div> 
-          <p>Will the data on my computer be safe?</p>
-          <p>We completely wipe the storage drive using <a href="https://dban.org/">DBAN</a>. If you are still concerned, we can physically remove the drive from the computer for you to keep. </p>
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Impact</a>
+        <div class="dropdown-content">
+          <a href="../blog/index.html">Blog</a>
+          <a href="../dashboard/index.html">Dashboard</a>
         </div>
-
-        <div> 
-          <p>Can I get tax credit/exemption for my donation?</p>
-          <p>The Power Up Project is a registered 501(c)(3) nonprofit organization. We will provide a receipt upon request.</p>
-        </div>
-
-        <div>
-          <p>Will you accept...?</p>
-          <ul>
-            <li><strong>Printers/Scanners: </strong>No</li>
-            <li><strong>Fax Machines: </strong>No</li>
-            <li><strong>Mobile Phones: </strong>Yes</li>
-            <li><strong>Gaming Consoles (Xbox, PlayStation, Nintendo): </strong>Yes, if they are in working condition</li>
-            <li><strong>Tablets/iPads: </strong>Yes</li>
-            <li><strong>Laptops: </strong>Yes, even if they are broken or outdated</li>
-            <li><strong>PCs: </strong>Yes, even if they are broken or outdated</li>
-            <li><strong>Computer Parts (RAM, SSDs, Hard Drives, Power Supplies, etc.): </strong>Yes</li>
-            <li><strong>Computer Accessories (Mice, Keyboards, Cables, etc.): </strong>Yes</li>
-            <li><strong>Flatscreen Monitors: </strong>Yes, if they are in working condition. (We do NOT accept CRT monitors)</li>
-          </ul>
-        </div>
-      
-    </div>
-
-    <div id="footer">
-      <p id="copyright">© 2023 The Power Up Project, a 501(c)(3) organization</p>
-      <p id="EIN">EIN: 85-1457486</p>
-      <div id="social-container">
-        <a href="https://www.facebook.com/thepowerupproj/"><img src="../images/facebook.png"></a>
-        <a href="https://www.instagram.com/thepowerupproject/"><img src="../images/instagram.png"></a>
       </div>
-      <a id="email" href="mailto:thepowerupproj@gmail.com">thepowerupproj@gmail.com</a>
     </div>
 
-    
-  </body>
+  <div id="footer">
+    <p id="copyright">© 2023 The Power Up Project, a 501(c)(3) organization</p>
+    <p id="EIN">EIN: 85-1457486</p>
+    <div id="social-container">
+      <a href="https://www.facebook.com/thepowerupproj/"><img src="../images/facebook.png"></a>
+      <a href="https://www.instagram.com/thepowerupproject/"><img src="../images/instagram.png"></a>
+    </div>
+    <a id="email" href="mailto:thepowerupproj@gmail.com">thepowerupproj@gmail.com</a>
+  </div>
+</body>
 </html>
