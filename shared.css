@@ -118,17 +118,16 @@ body {
   background-color: #f1f1f1;
 }
 
+/* Show dropdown content on hover of .dropdown */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-.dropbtn {
-  color: inherit;
-  font-size: inherit;
-  border: none;
-  background: none;
-  cursor: pointer;
+/* Hide dropdown content by default */
+.dropdown-content:not(:hover) {
+  display: none;
 }
+
 
 .unbounded {
   min-height: auto;
