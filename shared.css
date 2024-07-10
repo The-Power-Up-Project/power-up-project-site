@@ -93,6 +93,14 @@ body {
 #navbar.dark > a {
   color: #efefef;
 }
+.dropdown .impact-menu {
+  color: white;
+}
+
+.dropdown:hover .impact-menu {
+  color: black;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -103,7 +111,7 @@ body {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -118,18 +126,8 @@ body {
   background-color: #f1f1f1;
 }
 
-/* Show dropdown content on hover of .dropdown */
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-/* Hide dropdown content by default */
-.dropdown-content:not(:hover) {
-  display: none;
-}
-
-.impact-menu {
-  color: white;
 }
 
 .unbounded {
