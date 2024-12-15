@@ -1,106 +1,174 @@
+/* Shadcn-inspired Variables */
+:root {
+  --background: #ffffff;
+  --foreground: #020817;
+  --card: #ffffff;
+  --card-foreground: #020817;
+  --popover: #ffffff;
+  --popover-foreground: #020817;
+  --primary: #0096C7;
+  --primary-foreground: #f9fafb;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #1f2937;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --accent: #f3f4f6;
+  --accent-foreground: #1f2937;
+  --destructive: #ef4444;
+  --destructive-foreground: #f9fafb;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #0096C7;
+  --radius: 0.75rem;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+/* Dashboard Layout */
 #dashboard-container {
+  max-width: 1200px;
   margin: 0 auto;
-  min-width: 600px;
-  width: 60vw;
+  padding: 1.5rem;
 }
 
 #dashboard-header {
   font-family: Selawik;
-  font-size: 7vh;
+  font-size: 2.25rem;
   font-weight: 600;
-  color: #0096C7;
-  padding: 12vh 0 0 0;
-  display: inline-block;
+  color: var(--foreground);
+  margin-bottom: 2rem;
 }
 
-.post {
-  background-color: white;
-  width: 100%;
-  border-radius: 2vh;
-  padding: 3vh 3vw;
-  margin-bottom: 4vh;
-  cursor: pointer;
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.title {
-  font-size: 4vh;
+.dashboard-section {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-section h2 {
+  color: var(--foreground);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.metric-card {
+  background-color: var(--muted);
+  border-radius: calc(var(--radius) - 0.25rem);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.metric-card:last-child {
+  margin-bottom: 0;
+}
+
+.metric-value {
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.metric-label {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.impact-stories {
+  display: grid;
+  gap: 1rem;
+}
+
+.story-card {
+  background-color: var(--muted);
+  border-radius: calc(var(--radius) - 0.25rem);
+  padding: 1.25rem;
+}
+
+.story-card h3 {
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.story-card p {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.organization-list {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-.date {
-  margin: 0;
-  font-size: 2vh;
-  font-style: italic;
+.organization-list li {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--foreground);
+  font-size: 0.875rem;
 }
 
-.content-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 2vh;
+.organization-list li:last-child {
+  border-bottom: none;
 }
 
-.content-list > img {
-  object-fit: contain;
-  width: 50%;
-  margin: 0 1vw;
-}
-
-.content-list > p {
-  font-size: 2vh;
-  margin: 0 1vw;
-}
-
-.content-post {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 2vh;
-}
-
-.content-post img {
-  object-fit: contain;
-  width: 70%;
-  height: 50vh;
-  margin: 1vh 2vw;
-}
-
-.content-post > p {
-  font-size: 2vh;
-}
-
-.content-post button {
-  background-color: #0096C7;
-  color: white;
-  font-size: 3vh;
-  border-radius: 2vh;
-  font-family: "Selawik";
-  padding: 1vh 2vw;
-  border: none
-}
-
-@media only screen and (max-width: 1000px) {
-  .content-list {
-    flex-direction: column;
-  }
-  
-  .content-list > img {
-    margin: 1vh 0;
+/* Responsive Design */
+@media (max-width: 768px) {
+  #dashboard-container {
+    padding: 1rem;
   }
 
-  .content-list > p {
-    margin: 1vh 0;
+  .dashboard-grid {
+    grid-template-columns: 1fr;
   }
 
-  #blog-container {
-    min-width: unset;
-    width: 80vw;
-    margin: 0 10vw;
-  }
-
-  .post {
-    padding: 3vh 6vw;
+  #dashboard-header {
+    font-size: 1.875rem;
   }
 }
