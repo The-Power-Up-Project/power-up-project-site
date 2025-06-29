@@ -45,20 +45,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 2vw;
   transition: 0.2s all;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   z-index: 5;
 }
 
-#navbar a {
+#navbar a, .dropdown {
   display: flex;
   align-items: center;
   text-decoration: none;
   font-size: 2.8vh;
   height: 9vh;
-  margin: 0 1vw;
   transition: 0.2s all;
+}
+
+#navbar a {
   color: white; /* Default text color for navbar links */
 }
 
@@ -97,19 +100,52 @@ body {
 
 .dropdown {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  height: 9vh;
+}
+
+.dropdown .dropbtn {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: Selawik;
+  color: inherit;
+  font-size: inherit;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  transition: 0.2s all;
+}
+
+#navbar.light .dropbtn {
+  color: #0096C7;
+}
+
+#navbar.dark .dropbtn {
+  color: #efefef;
+}
+
+.dropdown .dropbtn:hover {
+  color: #468DAB;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
+  left: 0;
+  top: 100%;
+  min-width: 100%;
+  width: max-content;
   background-color: white; /* White background color */
-  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 10;
   color: black; /* Black text color */
   border-radius: 4px;
-  margin-top: 0;
+  margin-top: 2px;
+  padding: 0;
 }
 
 .dropdown-content a {
@@ -117,6 +153,8 @@ body {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  min-width: 160px;
+  white-space: nowrap;
 }
 
 .dropdown-content a:hover {
@@ -126,15 +164,6 @@ body {
 /* Show dropdown content on hover */
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-/* Change text color of Impact menu item */
-.dropbtn {
-  color: inherit; /* Inherit color from parent */
-}
-
-.dropbtn:hover {
-  color: #468DAB; /* Match the hover color of other nav items */
 }
 
 .unbounded {

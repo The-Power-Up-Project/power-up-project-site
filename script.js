@@ -14,3 +14,12 @@ document.addEventListener("scroll", () => {
   }
 })
 
+document.addEventListener('DOMContentLoaded', function() {
+  var impactBtn = document.querySelector('.dropbtn');
+  if (impactBtn) {
+    impactBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+    });
+  }
+});
+
