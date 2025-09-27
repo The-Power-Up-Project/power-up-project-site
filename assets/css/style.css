@@ -85,7 +85,6 @@ nav img {
   background-color: #ddd;
 }
 
-/* ...existing code... */
 
 .site-footer {
   background:#2f2f2f;
@@ -146,6 +145,158 @@ nav img {
 .site-footer a:hover,
 .site-footer a:focus {
   text-decoration:none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-content label {
+  font-weight: bold;
+  color: #555;
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.modal-content textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-content button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+.modal-content button[type="button"] {
+  background-color: #6c757d;
+}
+
+.modal-content button[type="button"]:hover {
+  background-color: #545b62;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 0 20px 40px;
+}
+
+.image-item {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.image-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+}
+
+.image-item img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.image-item h3 {
+  margin: 0;
+  padding: 14px 16px;
+  font-size: 16px;
+  background: #f8f8f8;
+}
+
+.hover-btn {
+  position: absolute;
+  right: 12px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  display: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hover-btn:hover {
+  background: #1490c7;
+  transform: translateY(-1px);
+}
+
+.image-item .edit-btn {
+  top: 12px;
+}
+
+.image-item .delete-btn {
+  top: 52px;
+}
+
+.image-item:hover .hover-btn {
+  display: block;
 }
 
 @media (max-width:750px) {
