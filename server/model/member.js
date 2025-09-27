@@ -1,11 +1,11 @@
 /**
- * schema for leadership positions
+ * schema for leadership members
  */
 
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-  executiveStaff: {
+  advisoryBoard: {
     type: Boolean,
     required: true,
   },
@@ -19,14 +19,18 @@ const schema = new mongoose.Schema({
   },
   school: {
     type: String,
-    required: false,
+    required: true,
   },
   graduationYear: {
     type: Number,
-    required: false,
+    required: true,
   },
-  photo: {
-    type: mongoose.Schema.Types.ObjectId,
+  imageData: {
+    type: Buffer,
     required: true,
   },
 });
+
+const Member = mongoose.model("Member", schema);
+
+module.exports = Member;

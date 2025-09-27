@@ -1,7 +1,7 @@
 const express = require("express");
 const route = express.Router();
-
 const Image = require("../model/image");
+const Member = require("../model/member");
 
 // Public routes
 route.get("/", (req, res) => {
@@ -68,6 +68,57 @@ route.delete("/admin/images/delete/:id", async (req, res) => {
   }
   res.status(200).send("Image deleted");
 });
+
+route.get("/admin/members", async (req, res) => {
+  const members = await Member.find().sort({ createdAt: -1 });
+  res.render("admin/members", { members });
+});
+
+route.post("/admin/members/add", async (req, res) => {
+  const { name, position, school, graduationYear, advisoryBoard, imageData } = req.body;
+  if (!name || !position || !school || !graduationYear || advisoryBoard === undefined || !imageData) {
+    return res.status(400).send("All fields are required");
+  }
+  const newMember = new Member({
+    name,
+    position,
+    school,
+    graduationYear,
+    advisoryBoard,
+    imageData: Buffer.from(imageData, "base64"),
+  });
+  await newMember.save();
+  res.redirect("/admin/members");
+});
+
+route.put("/admin/members/edit/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, position, school, graduationYear, advisoryBoard } = req.body;
+  if (!name || !position || !school || !graduationYear || advisoryBoard === undefined) {
+    return res.status(400).send("All fields are required");
+  }
+  const updatedMember = await Member.findByIdAndUpdate(id, {
+    name,
+    position,
+    school,
+    graduationYear,
+    advisoryBoard,
+  });
+  if (!updatedMember) {
+    return res.status(404).send("Member not found");
+  }
+  res.redirect("/admin/members");
+});
+
+route.delete("/admin/members/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedMember = await Member.findByIdAndDelete(id);
+  if (!deletedMember) {
+    return res.status(404).send("Member not found");
+  }
+  res.status(200).send("Member deleted");
+});
+
 
 
 module.exports = route;
