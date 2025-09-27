@@ -15,8 +15,8 @@ const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 
 // connect to the database
-// const connectDB = require("./server/database/connection");
-// connectDB();
+const connectDB = require("./server/database/connection");
+connectDB();
 
 // import the express-session module, which is used to manage sessions
 const session = require("express-session");
@@ -54,15 +54,15 @@ app.use("/js", express.static("assets/js"));
 //  when we call next(), it goes to the next function in the chain.
 
 app.use(async (req, res, next) => {
-  if (!req.path.startsWith("/admin")) {
-    return next(); // allow access to any page that doesn't require authentication
+  if (!req.path.startsWith("/admin") || req.path === "/login") {
+    return next();
   }
-
-  // todo: implement auth
+  if (req.session && req.session.Admin) {
+    return next();
+  }
+  res.redirect("/login");
 });
 
-// to keep this file manageable, we will move the routes to a separate file
-//  the exported router object is an example of middleware
 app.use("/", require("./server/routes/router"));
 
 app.all("*", (req, res) => {

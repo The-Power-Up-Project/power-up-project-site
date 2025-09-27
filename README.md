@@ -5,13 +5,13 @@ Site for Power Up Project, a 501(c)(3) non-profit based in Illinois.
 Setup:
 
 1. Install Node.js
-   
 2. Create .env file in the root directory (/power-up-project-site):
 
 ```
 SESSION_SECRET=create-a-session-secret (https://randomkeygen.com/)
+ADMIN_PASSWORD=
 PORT_NUM=XXXX (ex: 8080)
-MONGO_URI=Ask-Jack
+MONGO_URI=Ask Jack
 ```
 
 3. Open a terminal in the root directory (/power-up-project-site) and run:

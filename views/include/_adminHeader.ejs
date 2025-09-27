@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Power Up Project</title>
+  </head>
+  <body>
+    <span>
+      <header>
+        <nav>
+          <a href="/"
+            ><img src="/img/logo-icon-blue.png" alt="Power Up Project Logo"
+          /></a>
+          <div class="dropdown">
+            <button class="dropbtn">Data</button>
+            <div class="dropdown-content">
+              <a href="/admin/stats">Impact Stats</a>
+              <a href="/admin/blog">Blogs</a>
+              <a href="/admin/faq">FAQs</a>
+              <a href="/admin/images">Images</a>
+              <a href="/admin/partners">Partners</a>
+              <a href="/admin/testimonials">Testimonials</a>
+              <a href="/admin/leadership">Leadership</a>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </span>
+    <script>
+      document.querySelector(".dropbtn").addEventListener("click", function () {
+        const content = document.querySelector(".dropdown-content");
+        content.style.display =
+          content.style.display === "block" ? "none" : "block";
+      });
+
+      window.addEventListener("click", function (e) {
+        if (!e.target.matches(".dropbtn")) {
+          const content = document.querySelector(".dropdown-content");
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

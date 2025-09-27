@@ -1,0 +1,8 @@
+<%- include('include/_header') -%>
+<h1>Admin Login</h1>
+<form action="/login" method="POST">
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required />
+  <button type="submit">Login</button>
+</form>
+<%- include('include/_footer') -%>
