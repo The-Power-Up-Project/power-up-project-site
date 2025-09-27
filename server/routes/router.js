@@ -27,7 +27,7 @@ route.post("/login", (req, res) => {
 });
 
 route.get("/admin", (req, res) => {
-  res.render("admin");
+  res.render("admin/admin");
 });
 
 module.exports = route;
