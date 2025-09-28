@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add new member
   document.getElementById("addMemberButton").addEventListener("click", (event) => {
     event.preventDefault(); 
+    const button = event.target;
+    button.disabled = true; 
     const file = document.getElementById("memberImageFile").files[0]; 
     if (!file) {
       alert("Please provide an image file.");
@@ -61,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (response.ok) window.location.reload();
       else alert("Failed to add member.");
+      button.disabled = false;
     };
     reader.readAsDataURL(file);
   });

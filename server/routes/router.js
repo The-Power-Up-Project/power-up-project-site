@@ -2,6 +2,7 @@ const express = require("express");
 const route = express.Router();
 const Image = require("../model/image");
 const Member = require("../model/member");
+const Stat = require("../model/stat");
 
 // Public routes
 route.get("/", (req, res) => {
@@ -70,7 +71,7 @@ route.delete("/admin/images/delete/:id", async (req, res) => {
 });
 
 route.get("/admin/members", async (req, res) => {
-  const members = await Member.find().sort({ createdAt: -1 });
+  const members = await Member.find().sort({ advisoryBoard: -1 });
   res.render("admin/members", { members });
 });
 
@@ -119,6 +120,34 @@ route.delete("/admin/members/delete/:id", async (req, res) => {
   res.status(200).send("Member deleted");
 });
 
+route.get("/admin/stats", async (req, res) => {
+  const stats = await Stat.find().sort({ date: -1 }) // find most recent entry
+  if (!stats) {
+    return res.status(404).send("Stats not found");
+  }
+  res.render("admin/stats", { stats });
+});
+route.post("/admin/stats/update", async (req, res) => {
+
+  const { computersDonated, phonesDonated, monitorsDonated, devicesCollected, totalDonationValue } = req.body;
+  if (!computersDonated || !phonesDonated || !monitorsDonated || !devicesCollected || !totalDonationValue) {
+    return res.status(400).send("All fields are required");
+  }
+  if (isNaN(computersDonated) || isNaN(phonesDonated) || isNaN(monitorsDonated) || isNaN(devicesCollected) || isNaN(totalDonationValue)) {
+    return res.status(400).send("All fields must be numbers");
+  }
+
+  const newStatEntry = new Stat({
+    date: Date.now(),
+    computersDonated,
+    phonesDonated,
+    monitorsDonated,
+    devicesCollected,
+    totalDonationValue,
+  });
+  await newStatEntry.save();
+  res.redirect("/admin/stats");
+});
 
 
 module.exports = route;

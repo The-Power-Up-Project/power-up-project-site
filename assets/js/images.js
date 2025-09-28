@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const name = file.name;
     const reader = new FileReader();
+    const button = event.target;
+    button.disabled = true; 
     reader.onload = async (event) => {
       const base64 = event.target.result.split(",")[1];
       const response = await fetch("/admin/images/add", {
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (response.ok) window.location.reload();
       else alert("Failed to add image.");
+      button.disabled = false;
     };
     reader.readAsDataURL(file);
   });

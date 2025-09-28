@@ -1,10 +1,14 @@
 /**
- * Schema for the stats
+ * Schema for a statistics entry
  */
 
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
+  date: {
+    type: Date,
+    default: Date.now,
+  },
   computersDonated: {
     type: Number,
     required: true,
