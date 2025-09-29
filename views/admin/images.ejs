@@ -41,10 +41,10 @@
 </div>
 
 <!-- Main Content -->
-<h1 style="text-align: center; margin-top: 20px;">Admin - Images</h1>
-<div style="text-align: center; margin: 20px;">
-  <button id="openAddModal">Add New Image</button>
-</div>
+<div class="container mt-4 text-center">
+<h1>Admin - Images</h1>
+<button class="btn btn-success mb-3" id="openAddModal">Add New Image</button>
+
 <div class="image-grid">
   <% images.forEach(image => { %>
   <div class="image-item" data-id="<%= image._id %>" data-name="<%= image.name %>">
@@ -52,6 +52,7 @@
     <img src="data:image/png;base64,<%= image.imageData.toString('base64') %>" alt="<%= image.name %>" />
   </div>
 <% }); %>
+</div>
 </div>
 
 <script src="/js/images.js"></script>

@@ -5,6 +5,7 @@ const Member = require("../model/member");
 const Partner = require("../model/partner");
 const Testimonial = require("../model/testimonial");
 const Stat = require("../model/stat");
+const Blog = require("../model/blog");
 
 // Public routes
 route.get("/", (req, res) => {
@@ -218,6 +219,73 @@ route.delete("/admin/testimonials/delete/:id", async (req, res) => {
     return res.status(404).send("Testimonial not found");
   }
   res.status(200).send("Testimonial deleted");
+});
+
+route.get("/admin/blogs", async (req, res) => {
+  const blogs = await Blog.find().populate({ path: 'image', model: Image }).populate({ path: 'partners', model: Partner }).sort({ date: -1 });
+  const partners = await Partner.find().sort({ name: 1 });
+  res.render("admin/blogs", { blogs, partners });
+});
+
+route.post("/admin/blogs/add", async (req, res) => {
+  const { title, content, date, imageData, partners } = req.body;
+  if (!title || !content) {
+    return res.status(400).send("Title and content are required");
+  }
+  if (imageData) {
+    imageData = Buffer.from(imageData, "base64");
+    image = new Image({
+      name: `Blog Image - ${title}`,
+      imageData,
+    });
+    await image.save();
+  }
+  const newBlog = new Blog({
+    title,
+    content,
+    date: date ? new Date(date) : Date.now(),
+    image: imageData ? image._id : null,
+    partners,
+  });
+  await newBlog.save();
+  res.redirect("/admin/blogs");
+});
+
+route.put("/admin/blogs/edit/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, content, date, imageData, oldImageId, partners } = req.body;
+  if (!title || !content) {
+    return res.status(400).send("Title and content are required");
+  }
+  const updateData = {
+    title,
+    content,
+    date: date ? new Date(date) : Date.now(),
+    partners,
+  };
+  if (imageData) {
+    Image.findByIdAndDelete(oldImageId); 
+    const image = new Image({
+      name: `Blog Image - ${title}`,
+      imageData: Buffer.from(imageData, "base64"),
+    });
+    await image.save();
+    updateData.image = image._id;
+  }
+  const updatedBlog = await Blog.findByIdAndUpdate(id, updateData);
+  if (!updatedBlog) {
+    return res.status(404).send("Blog not found");
+  }
+  res.redirect("/admin/blogs");
+});
+
+route.delete("/admin/blogs/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedBlog = await Blog.findByIdAndDelete(id);
+  if (!deletedBlog) {
+    return res.status(404).send("Blog not found");
+  }
+  res.status(200).send("Blog deleted");
 });
 
 route.get("/admin/stats", async (req, res) => {

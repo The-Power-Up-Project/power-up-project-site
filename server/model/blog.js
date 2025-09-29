@@ -17,8 +17,8 @@ const schema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  images: {
-    type: [mongoose.Schema.Types.ObjectId],
+  image: {
+    type: mongoose.Schema.Types.ObjectId,
     required: false,
   },
   partners: {
