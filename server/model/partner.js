@@ -5,7 +5,7 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-  supporter: {
+  donator: {
     type: Boolean,
     required: true,
   },
@@ -13,12 +13,8 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  location: {
-    type: String,
-    required: false,
-  },
-  logo: {
-    type: mongoose.Schema.Types.ObjectId,
+  imageData: {
+    type: Buffer,
     required: false,
   },
   url: {

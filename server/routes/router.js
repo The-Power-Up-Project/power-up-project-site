@@ -2,6 +2,7 @@ const express = require("express");
 const route = express.Router();
 const Image = require("../model/image");
 const Member = require("../model/member");
+const Partner = require("../model/partner");
 const Stat = require("../model/stat");
 
 // Public routes
@@ -118,6 +119,53 @@ route.delete("/admin/members/delete/:id", async (req, res) => {
     return res.status(404).send("Member not found");
   }
   res.status(200).send("Member deleted");
+});
+
+route.get("/admin/partners", async (req, res) => {
+  const partners = await Partner.find().sort({ donator: -1 });
+  res.render("admin/partners", { partners });
+});
+
+route.post("/admin/partners/add", async (req, res) => {
+  const { name, url, donator, imageData } = req.body;
+  if (!name || !url  || !imageData || donator === undefined ) {
+    return res.status(400).send("All fields are required");
+  }
+  const newPartner = new Partner({
+    name,
+    url,
+    donator,
+    imageData: Buffer.from(imageData, "base64"),
+  });
+  await newPartner.save();
+  res.redirect("/admin/partners");
+});
+
+route.put("/admin/partners/edit/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, url, donator , imageData} = req.body;
+  if (!name || !url || donator === undefined) {
+    return res.status(400).send("All fields are required");
+  }
+  const updateData = {
+    name,
+    url,
+    donator: donator === 'true',
+  };
+  if (imageData) {
+    updateData.imageData = Buffer.from(imageData, 'base64');
+  }
+  await Partner.findByIdAndUpdate(req.params.id, updateData);
+  res.redirect("/admin/partners");
+});
+
+route.delete("/admin/partners/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedPartner = await Partner.findByIdAndDelete(id);
+  if (!deletedPartner) {
+    return res.status(404).send("Partner not found");
+  }
+  res.status(200).send("Partner deleted");
 });
 
 route.get("/admin/stats", async (req, res) => {
