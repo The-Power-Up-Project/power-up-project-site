@@ -19,7 +19,7 @@ route.get("/home", (req, res) => {
 // Admin routes
 route.get("/login", (req, res) => {
   if (req.session.Admin) {
-    return res.redirect("/admin/blogs");
+    return res.redirect("/admin/stats");
   }
   res.render("login");
 });
@@ -29,7 +29,7 @@ route.post("/login", (req, res) => {
   if (password === process.env.ADMIN_PASSWORD) {
     req.session.Admin = true;
   }
-  res.redirect("/admin/images");
+  res.redirect("/admin/stats");
 });
 
 route.get("/admin/images", async (req, res) => {
