@@ -11,37 +11,15 @@
     <span>
       <header>
         <nav>
-          <a href="/faq">FAQ</a>
+          <a href="/blog">Blog</a>
           <a href="/donate">Donate</a>
           <a href="/"
             ><img src="/img/logo-icon-blue.png" alt="Power Up Project Logo"
           /></a>
-          <div class="dropdown">
-            <button class="dropbtn">Impact</button>
-            <div class="dropdown-content">
-              <a href="/blog">Blog</a>
-              <a href="/stats">Stats</a>
-            </div>
-          </div>
+          <a href="/stats">Stats</a>
           <a href="/leadership">Leadership</a>
         </nav>
       </header>
     </span>
-    <script>
-      document.querySelector(".dropbtn").addEventListener("click", function () {
-        const content = document.querySelector(".dropdown-content");
-        content.style.display =
-          content.style.display === "block" ? "none" : "block";
-      });
-
-      window.addEventListener("click", function (e) {
-        if (!e.target.matches(".dropbtn")) {
-          const content = document.querySelector(".dropdown-content");
-          if (content.style.display === "block") {
-            content.style.display = "none";
-          }
-        }
-      });
-    </script>
   </body>
 </html>

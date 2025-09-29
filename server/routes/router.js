@@ -33,7 +33,7 @@ route.post("/login", (req, res) => {
 });
 
 route.get("/admin/images", async (req, res) => {
-  const images = await Image.find().sort({ createdAt: -1 }); // sort newest first
+  const images = await Image.find()
   res.render("admin/images", { images });
 });
 
