@@ -19,7 +19,7 @@ route.get("/home", (req, res) => {
 // Admin routes
 route.get("/login", (req, res) => {
   if (req.session.Admin) {
-    return res.redirect("/admin/images");
+    return res.redirect("/admin/blogs");
   }
   res.render("login");
 });
