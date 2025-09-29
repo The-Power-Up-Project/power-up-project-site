@@ -9,8 +9,12 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  author: {
+  partner: {
     type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  partnerName: {
+    type: String,
     required: true,
   },
 });

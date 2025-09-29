@@ -3,6 +3,7 @@ const route = express.Router();
 const Image = require("../model/image");
 const Member = require("../model/member");
 const Partner = require("../model/partner");
+const Testimonial = require("../model/testimonial");
 const Stat = require("../model/stat");
 
 // Public routes
@@ -166,6 +167,57 @@ route.delete("/admin/partners/delete/:id", async (req, res) => {
     return res.status(404).send("Partner not found");
   }
   res.status(200).send("Partner deleted");
+});
+
+route.get("/admin/testimonials", async (req, res) => {
+  const testimonials = await Testimonial.find();
+  const partners = await Partner.find().sort({ name: 1 });
+  res.render("admin/testimonials", { testimonials, partners });
+});
+route.post("/admin/testimonials/add", async (req, res) => {
+  const { partner, content } = req.body;
+  if (!partner || !content) {
+    return res.status(400).send("All fields are required");
+  }
+  const partnerDoc = await Partner.findById(partner);
+  if (!partnerDoc) {
+    return res.status(400).send("Invalid partner");
+  }
+  const newTestimonial = new Testimonial({
+    partner,
+    partnerName: partnerDoc.name,
+    content,
+  });
+  await newTestimonial.save();
+  res.redirect("/admin/testimonials");
+});
+route.put("/admin/testimonials/edit/:id", async (req, res) => {
+  const { id } = req.params;
+  const { partner, content } = req.body;
+  if (!partner || !content) {
+    return res.status(400).send("All fields are required");
+  }
+  const partnerDoc = await Partner.findById(partner);
+  if (!partnerDoc) {
+    return res.status(400).send("Invalid partner");
+  }
+  const updatedTestimonial = await Testimonial.findByIdAndUpdate(id, {
+    partner,
+    partnerName: partnerDoc.name,
+    content,
+  });
+  if (!updatedTestimonial) {
+    return res.status(404).send("Testimonial not found");
+  }
+  res.redirect("/admin/testimonials");
+});
+route.delete("/admin/testimonials/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedTestimonial = await Testimonial.findByIdAndDelete(id);
+  if (!deletedTestimonial) {
+    return res.status(404).send("Testimonial not found");
+  }
+  res.status(200).send("Testimonial deleted");
 });
 
 route.get("/admin/stats", async (req, res) => {
