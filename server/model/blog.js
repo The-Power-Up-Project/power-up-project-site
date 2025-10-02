@@ -20,6 +20,7 @@ const schema = new mongoose.Schema({
   image: {
     type: mongoose.Schema.Types.ObjectId,
     required: false,
+    // not every blog post will have an image
   },
   partners: {
     type: [mongoose.Schema.Types.ObjectId],
