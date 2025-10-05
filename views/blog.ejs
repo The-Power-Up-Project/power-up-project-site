@@ -1,0 +1,28 @@
+<%- include('include/_header') -%>
+
+<main class="read-blogs-main">
+  <section class="blogs-section">
+    <h1>Our Blog</h1>
+    <div class="blogs-container">
+      <% if (blogs && blogs.length > 0) { %>
+        <% blogs.forEach(blog => { %>
+          <a href="/blogs/<%= blog._id %>" class="blog-card">
+            <% if (blog.image) { %>
+              <img src="data:image/png;base64,<%= blog.image.imageData ? blog.image.imageData.toString('base64') : '' %>" alt="<%= blog.image.filename || 'Blog Image' %>" class="blog-image" />
+            <% } else { %>
+              <div class="blog-image-placeholder">No Image</div>
+            <% } %>
+            <div class="blog-content">
+              <h2 class="blog-title"><%= blog.title %></h2>
+              <h4 class="blog-date"><%= new Date(blog.date).toLocaleDateString() %></h4>
+            </div>
+          </a>
+        <% }) %>
+      <% } else { %>
+        <p>No blog posts available at the moment. Please check back later!</p>
+      <% } %>
+    </div>
+  </section>
+</main>
+
+<%- include('include/_footer') -%>

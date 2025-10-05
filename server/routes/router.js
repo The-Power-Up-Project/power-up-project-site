@@ -16,12 +16,23 @@ route.get("/home", async (req, res) => {
   try {
     const galleryImages = await Image.aggregate([{ $sample: { size: 8 } }]);
     const testimonials = await Testimonial.find().populate('partner').limit(3);
-    const recentBlogs = await Blog.find().populate('image').sort({ date: -1 }).limit(3);
+    const recentBlogs = await Blog.find().populate({ path: 'image', model: Image }).sort({ date: -1 }).limit(3);
     
     res.render("home", { galleryImages, testimonials, recentBlogs });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error loading home page");
+  }
+});
+
+route.get("/blog", async (req, res) => {
+  try {
+    const blogs = await Blog.find().populate({ path: 'image', model: Image }).populate({ path: 'partners', model: Partner }).sort({ date: -1 });
+    console.log(blogs);
+    res.render("blog", { blogs });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error loading blogs");
   }
 });
 

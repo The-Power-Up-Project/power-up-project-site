@@ -340,7 +340,7 @@ nav img {
   text-decoration: none;
 }
 
-/* Blog Section */
+/* Recent Blog Section */
 .blog-container {
   display: flex;
   gap: 20px;
@@ -409,5 +409,116 @@ nav img {
   }
   .hero-content .tagline {
     font-size: 1.2rem;
+  }
+}
+
+/** Blog Page Styles **/
+.read-blogs-main {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blogs-section h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #1490c7;
+  margin-bottom: 40px;
+}
+
+.blogs-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.blog-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  max-width: 350px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  text-decoration: none;
+}
+
+.blog-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.blog-image-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 1.1rem;
+}
+
+.blog-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.blog-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+.blog-date {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #777;
+}
+.blog-title {
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.read-more-btn {
+  display: inline-block;
+  background-color: #1490c7;
+  color: #fff;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.read-more-btn:hover {
+  background-color: #1073a0;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .blogs-container {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  .blogs-section h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blogs-container {
+    grid-template-columns: 1fr;
   }
 }
