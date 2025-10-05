@@ -64,6 +64,16 @@ route.get("/impact", async (req, res) => {
   }
 });
 
+route.get("/leadership", async (req, res) => {
+  try {
+    const members = await Member.find().sort({ advisoryBoard: -1, name: 1 });
+    res.render("leadership", { members });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error loading leadership page");
+  }
+});
+
 // Admin routes
 route.get("/login", (req, res) => {
   if (req.session.Admin) {
