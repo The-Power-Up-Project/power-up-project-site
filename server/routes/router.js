@@ -46,6 +46,10 @@ route.get("/blog/:id", async (req, res) => {
   }
 });
 
+route.get("/donate", (req, res) => {
+  res.render("donate");
+});
+
 // Admin routes
 route.get("/login", (req, res) => {
   if (req.session.Admin) {
