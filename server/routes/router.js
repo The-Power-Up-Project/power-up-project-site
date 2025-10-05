@@ -28,7 +28,6 @@ route.get("/home", async (req, res) => {
 route.get("/blog", async (req, res) => {
   try {
     const blogs = await Blog.find().populate({ path: 'image', model: Image }).populate({ path: 'partners', model: Partner }).sort({ date: -1 });
-    console.log(blogs);
     res.render("blog", { blogs });
   } catch (error) {
     console.error(error);
@@ -51,6 +50,18 @@ route.get("/donate", (req, res) => {
 });
 route.get("/join", (req, res) => {
   res.render("join");
+});
+
+route.get("/impact", async (req, res) => {
+  try {
+    const stats = await Stat.find().sort({ date: -1 }).limit(1);
+    const supporters = await Partner.find({ donator: true }).sort({ name: 1 });
+    const recipients = await Partner.find({ donator: false }).sort({ name: 1 });
+    res.render("impact", { stats, supporters, recipients });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error loading impact page");
+  }
 });
 
 // Admin routes
@@ -167,7 +178,7 @@ route.get("/admin/partners", async (req, res) => {
 
 route.post("/admin/partners/add", async (req, res) => {
   const { name, url, donator, imageData } = req.body;
-  if (!name || !url  || !imageData || donator === undefined ) {
+  if (!name || !imageData || donator === undefined) {
     return res.status(400).send("All fields are required");
   }
   const newPartner = new Partner({
@@ -182,8 +193,8 @@ route.post("/admin/partners/add", async (req, res) => {
 
 route.put("/admin/partners/edit/:id", async (req, res) => {
   const { id } = req.params;
-  const { name, url, donator , imageData} = req.body;
-  if (!name || !url || donator === undefined) {
+  const { name, url, donator, imageData } = req.body;
+  if (!name || donator === undefined) {
     return res.status(400).send("All fields are required");
   }
   const updateData = {

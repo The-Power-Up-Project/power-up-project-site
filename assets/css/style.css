@@ -449,6 +449,7 @@ nav img {
 .blog-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
   text-decoration: none;
 }
 
