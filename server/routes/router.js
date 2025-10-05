@@ -36,6 +36,16 @@ route.get("/blog", async (req, res) => {
   }
 });
 
+route.get("/blog/:id", async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id).populate({ path: 'image', model: Image }).populate({ path: 'partners', model: Partner });
+    res.render("readblog", { blog });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error loading blog post");
+  }
+});
+
 // Admin routes
 route.get("/login", (req, res) => {
   if (req.session.Admin) {

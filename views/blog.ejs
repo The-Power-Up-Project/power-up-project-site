@@ -6,7 +6,7 @@
     <div class="blogs-container">
       <% if (blogs && blogs.length > 0) { %>
         <% blogs.forEach(blog => { %>
-          <a href="/blogs/<%= blog._id %>" class="blog-card">
+          <a href="/blog/<%= blog._id %>" class="blog-card">
             <% if (blog.image) { %>
               <img src="data:image/png;base64,<%= blog.image.imageData ? blog.image.imageData.toString('base64') : '' %>" alt="<%= blog.image.filename || 'Blog Image' %>" class="blog-image" />
             <% } else { %>
