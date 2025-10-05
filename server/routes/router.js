@@ -49,6 +49,9 @@ route.get("/blog/:id", async (req, res) => {
 route.get("/donate", (req, res) => {
   res.render("donate");
 });
+route.get("/join", (req, res) => {
+  res.render("join");
+});
 
 // Admin routes
 route.get("/login", (req, res) => {
