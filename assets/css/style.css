@@ -283,19 +283,26 @@ nav img {
 
 .testimonial-card {
   background: #fff;
-  padding: 20px;
+  padding: 10px; 
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  flex-basis: 300px;
   text-align: left;
-  
   box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
+  width: auto; 
+  min-width: 200px;
 }
 
 .testimonial-content {
   font-style: italic;
   color: #555;
-  margin-bottom: 15px !important;
+  margin-bottom: 5px !important; 
+}
+
+.testimonial-author {
+  font-weight: bold;
+  color: #1490c7;
+  text-align: right;
+  margin-bottom: 0 !important;
 }
 
 .testimonial-author {
