@@ -10,7 +10,14 @@ function editMember(id) {
   document.getElementById('editSchool').value = row.dataset.school;
   document.getElementById('editGraduationYear').value = row.dataset.graduationYear;
   document.getElementById('editAdvisoryBoard').checked = row.dataset.advisoryBoard === 'true';
+  document.getElementById('editRank').value = row.dataset.rank || '';
+  // Toggle rank visibility
+  const editAdvisoryBoardCheckbox = document.getElementById('editAdvisoryBoard');
+  const editRankDiv = document.getElementById('editRankDiv');
+  toggleRank(editAdvisoryBoardCheckbox, editRankDiv);
 
+  // Add listener for edit checkbox
+  editAdvisoryBoardCheckbox.addEventListener('change', () => toggleRank(editAdvisoryBoardCheckbox, editRankDiv));
   // Show edit modal
   editModal.style.display = 'block';
 }
@@ -32,6 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeDeleteModal = document.getElementById('closeDeleteModal');
   const cancelDelete = document.getElementById('cancelDelete');
 
+  const advisoryBoardCheckbox = document.getElementById('advisoryBoard');
+  const rankDiv = document.getElementById('rankDiv');
+  advisoryBoardCheckbox.addEventListener('change', () => toggleRank(advisoryBoardCheckbox, rankDiv));
+
   // Open add modal
   openAddModal.addEventListener('click', () => {
     addModal.style.display = 'block';
@@ -52,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const school = document.getElementById("school").value;
     const graduationYear = document.getElementById("graduationYear").value;
     const advisoryBoard = document.getElementById("advisoryBoard").checked;
+    const rank = advisoryBoard ? null : document.getElementById("rank").value;
 
     const reader = new FileReader();
     reader.onload = async (event) => {
@@ -59,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch("/admin/members/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, position, school, graduationYear, advisoryBoard, imageData: base64 })
+        body: JSON.stringify({ name, position, school, graduationYear, advisoryBoard, rank, imageData: base64 })
       });
       if (response.ok) window.location.reload();
       else alert("Failed to add member.");
@@ -78,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const school = document.getElementById('editSchool').value;
     const graduationYear = document.getElementById('editGraduationYear').value;
     const advisoryBoard = document.getElementById('editAdvisoryBoard').checked;
+    const rank = advisoryBoard ? null : document.getElementById('editRank').value;
     const file = document.getElementById('editMemberImageFile').files[0];
 
     let imageData = null;
@@ -88,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch(`/admin/members/edit/${id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, position, school, graduationYear, advisoryBoard, imageData: base64 })
+          body: JSON.stringify({ name, position, school, graduationYear, advisoryBoard, rank, imageData: base64 })
         });
         if (response.ok) window.location.reload();
         else alert('Failed to update member.');
@@ -99,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(`/admin/members/edit/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, position, school, graduationYear, advisoryBoard })
+        body: JSON.stringify({ name, position, school, graduationYear, advisoryBoard, rank})
       });
       if (response.ok) window.location.reload();
       else alert('Failed to update member.');
@@ -132,3 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+// Function to toggle rank visibility
+function toggleRank(checkbox, rankDiv) {
+  if (checkbox.checked) {
+    rankDiv.style.display = 'none';
+  } else {
+    rankDiv.style.display = 'block';
+  }
+}

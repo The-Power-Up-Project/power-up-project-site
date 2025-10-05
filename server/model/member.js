@@ -9,6 +9,10 @@ const schema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  rank: {
+    type: Number,
+    required: false,
+  },
   position: {
     type: String,
     required: true,

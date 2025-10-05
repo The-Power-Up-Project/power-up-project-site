@@ -72,12 +72,8 @@
 
   .leadership-container {
     display: flex;
+    flex-direction: column;
     gap: 40px;
-    justify-content: space-around;
-  }
-
-  .executive-staff, .advisory-board {
-    flex: 1;
   }
 
   .leadership-section h2 {
@@ -89,8 +85,21 @@
 
   .members-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
+  }
+
+  .executive-staff .members-grid {
+    grid-template-columns: 1fr; 
+  }
+
+  .advisory-board .members-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+  }
+  .executive-staff, .advisory-board {
+    background-color: #f0f0f0; 
+    border-radius: 12px; 
+    padding: 20px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
   }
 
   .member-card {
@@ -104,6 +113,8 @@
 
   .member-card:hover {
     transform: translateY(-5px);
+
+    box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
   }
 
   .member-image {
@@ -134,16 +145,15 @@
       font-size: 2rem;
     }
     .leadership-container {
-      flex-direction: column;
       gap: 20px;
     }
-    .members-grid {
+    .advisory-board .members-grid {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
   }
 
   @media (max-width: 480px) {
-    .members-grid {
+    .advisory-board .members-grid {
       grid-template-columns: 1fr;
     }
   }

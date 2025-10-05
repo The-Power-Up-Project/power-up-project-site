@@ -66,7 +66,7 @@ route.get("/impact", async (req, res) => {
 
 route.get("/leadership", async (req, res) => {
   try {
-    const members = await Member.find().sort({ advisoryBoard: -1, name: 1 });
+    const members = await Member.find().sort({ advisoryBoard: -1, rank: 1, name: 1 }); // Sort advisory first, then by rank/name
     res.render("leadership", { members });
   } catch (error) {
     console.error(error);
@@ -132,12 +132,12 @@ route.delete("/admin/images/delete/:id", async (req, res) => {
 });
 
 route.get("/admin/members", async (req, res) => {
-  const members = await Member.find().sort({ advisoryBoard: -1 });
+  const members = await Member.find().sort({ advisoryBoard: -1, name: 1 });
   res.render("admin/members", { members });
 });
 
 route.post("/admin/members/add", async (req, res) => {
-  const { name, position, school, graduationYear, advisoryBoard, imageData } = req.body;
+  const { name, position, school, graduationYear, advisoryBoard, rank, imageData } = req.body;
   if (!name || !position || !school || !graduationYear || advisoryBoard === undefined || !imageData) {
     return res.status(400).send("All fields are required");
   }
@@ -147,6 +147,7 @@ route.post("/admin/members/add", async (req, res) => {
     school,
     graduationYear,
     advisoryBoard,
+    rank: advisoryBoard ? null : rank, 
     imageData: Buffer.from(imageData, "base64"),
   });
   await newMember.save();
@@ -155,7 +156,7 @@ route.post("/admin/members/add", async (req, res) => {
 
 route.put("/admin/members/edit/:id", async (req, res) => {
   const { id } = req.params;
-  const { name, position, school, graduationYear, advisoryBoard } = req.body;
+  const { name, position, school, graduationYear, advisoryBoard, rank } = req.body;
   if (!name || !position || !school || !graduationYear || advisoryBoard === undefined) {
     return res.status(400).send("All fields are required");
   }
@@ -165,6 +166,7 @@ route.put("/admin/members/edit/:id", async (req, res) => {
     school,
     graduationYear,
     advisoryBoard,
+    rank: advisoryBoard ? null : rank, 
   });
   if (!updatedMember) {
     return res.status(404).send("Member not found");

@@ -27,6 +27,10 @@
         <label for="advisoryBoard">Advisory Board:</label><br>
         <input type="checkbox" id="advisoryBoard" name="advisoryBoard" />
       </div>
+      <div id="rankDiv" style="display: none;"> 
+        <label for="rank">Rank:</label><br>
+        <input type="number" id="rank" name="rank" />
+      </div>
       <div>
         <label for="memberImageFile">Image File:</label><br>
         <input type="file" id="memberImageFile" accept="image/*" required />
@@ -63,6 +67,10 @@
         <label for="editAdvisoryBoard">Advisory Board:</label><br>
         <input type="checkbox" id="editAdvisoryBoard" name="advisoryBoard" />
       </div>
+      <div id="editRankDiv" style="display: none;"> 
+        <label for="editRank">Rank:</label><br>
+        <input type="number" id="editRank" name="rank" />
+      </div>
       <div>
         <label for="editMemberImageFile">Image File:</label><br>
         <input type="file" id="editMemberImageFile" accept="image/*" />
@@ -83,39 +91,40 @@
     <button id="cancelDeleteButton">Cancel</button>
   </div>
 </div>
-<!-- Main Content --->
 <div class="container mt-4 text-center">
   <h1>Admin - Members</h1>
   <button class="btn btn-success mb-3" id="openAddModal">Add New Member</button>
   <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Position</th>
-        <th>Group</th>
-        <th>School</th>
-        <th>Graduation Year</th>
-        <th>Image</th>
-        <th>Actions</th>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Group</th>
+      <th>School</th>
+      <th>Graduation Year</th>
+      <th>Rank</th> 
+      <th>Image</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% members.forEach(member => { %>
+      <tr data-id="<%= member._id %>" data-name="<%= member.name %>" data-position="<%= member.position %>" data-school="<%= member.school %>" data-graduation-year="<%= member.graduationYear %>" data-advisory-board="<%= member.advisoryBoard %>" data-rank="<%= member.rank %>">
+        <td><%= member.name %></td>
+        <td><%= member.position %></td>
+        <td><%= member.advisoryBoard ? "Advisory Board" : "Executive Staff" %></td>
+        <td><%= member.school %></td>
+        <td><%= member.graduationYear %></td>
+        <td><%= member.rank || '-' %></td>
+        <td><img src="data:image/jpeg;base64,<%= member.imageData.toString('base64') %>" alt="<%= member.name %>" class="img-thumbnail" width="100"></td>
+        <td>
+          <button class="btn btn-primary" onclick="editMember('<%= member._id %>')">Edit</button>
+          <button class="btn btn-danger" onclick="deleteMember('<%= member._id %>')">Delete</button>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <% members.forEach(member => { %>
-        <tr data-id="<%= member._id %>" data-name="<%= member.name %>" data-position="<%= member.position %>" data-school="<%= member.school %>" data-graduation-year="<%= member.graduationYear %>" data-advisory-board="<%= member.advisoryBoard %>">
-          <td><%= member.name %></td>
-          <td><%= member.position %></td>
-          <td><%= member.advisoryBoard ? "Advisory Board" : "Executive Staff" %></td>
-          <td><%= member.school %></td>
-          <td><%= member.graduationYear %></td>
-          <td><img src="data:image/jpeg;base64,<%= member.imageData.toString('base64') %>" alt="<%= member.name %>" class="img-thumbnail" width="100"></td>
-          <td>
-            <button class="btn btn-primary" onclick="editMember('<%= member._id %>')">Edit</button>
-            <button class="btn btn-danger" onclick="deleteMember('<%= member._id %>')">Delete</button>
-          </td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+    <% }) %>
+  </tbody>
+</table>
 </div>
 
 <script src="/js/members.js"></script>
