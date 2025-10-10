@@ -1,0 +1,252 @@
+<%- include('include/_header') -%>
+
+<main class="impact-main">
+  <section class="impact-header">
+    <h1>Our Impact</h1>
+    <p>Discover the difference we're making in bridging the digital divide through donations and partnerships.</p>
+  </section>
+
+  <section class="stats-section">
+    <h2>Key Statistics</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3><%= stats[0].computersDonated %></h3>
+        <p>💻 Computers Donated</p>
+      </div>
+      <div class="stat-card">
+        <h3><%= stats[0].phonesDonated %></h3>
+        <p>📱 Phones Donated</p>
+      </div>
+      <div class="stat-card">
+        <h3><%= stats[0].monitorsDonated %></h3>
+        <p>🖥️ Monitors Donated</p>
+      </div>
+      <div class="stat-card">
+        <h3><%= stats[0].devicesCollected %></h3>
+        <p>📦 Devices Collected</p>
+      </div>
+      <div class="stat-card">
+        <h3>$<%= stats[0].totalDonationValue.toLocaleString() %></h3>
+        <p>💰 Total Donation Value</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="partners-section">
+    <div class="partners-container">
+      <% if (supporters && supporters.length > 0) { %>
+        <div class="supporters">
+          <h2>Our Supporters</h2>
+          <div class="partners-grid">
+            <% supporters.forEach(partner => { %>
+              <div class="partner-card">
+                <% if (partner.imageData) { %>
+                  <img src="data:image/png;base64,<%= partner.imageData.toString('base64') %>" alt="<%= partner.name %>" class="partner-image" />
+                <% } %>
+                <h4><%= partner.name %></h4>
+                <% if (partner.url) { %>
+                  <a href="<%= partner.url %>" target="_blank" class="partner-link">Visit Website</a>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      <% } %>
+
+      <% if (recipients && recipients.length > 0) { %>
+        <div class="recipients">
+          <h2>Our Recipients</h2>
+          <div class="partners-grid">
+            <% recipients.forEach(partner => { %>
+              <div class="partner-card">
+                <% if (partner.imageData) { %>
+                  <img src="data:image/png;base64,<%= partner.imageData.toString('base64') %>" alt="<%= partner.name %>" class="partner-image" />
+                <% } %>
+                <h4><%= partner.name %></h4>
+                <% if (partner.url) { %>
+                  <a href="<%= partner.url %>" target="_blank" class="partner-link">Visit Website</a>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </section>
+</main>
+
+<%- include('include/_footer') -%>
+
+<style>
+  .impact-main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .impact-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .impact-header h1 {
+    font-size: 2.5rem;
+    color: #1490c7;
+    margin-bottom: 15px;
+  }
+
+  .impact-header p {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .stats-section {
+    margin-bottom: 60px;
+  }
+
+  .stats-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #1490c7;
+    margin-bottom: 30px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+  }
+
+  .stat-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 200px;
+    transition: transform 0.2s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
+  }
+
+  .stat-card h3 {
+    font-size: 2rem;
+    color: #1490c7;
+    margin-bottom: 10px;
+  }
+
+  .stat-card p {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+  }
+
+  .partners-section {
+    margin-bottom: 60px;
+  }
+
+  .partners-container {
+    display: flex;
+    gap: 40px;
+    justify-content: space-around;
+  }
+
+  .supporters, .recipients {
+    flex: 1;
+  }
+
+  .partners-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #1490c7;
+    margin-bottom: 30px;
+  }
+
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .partner-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .partner-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .partner-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+
+  .partner-card h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .partner-link {
+    display: inline-block;
+    color: #1490c7;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 1px solid #1490c7;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .partner-link:hover {
+    background-color: #1490c7;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .impact-main {
+      padding: 20px 15px;
+    }
+    .impact-header h1 {
+      font-size: 2rem;
+    }
+    .stats-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .partners-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .partners-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+    .partners-grid {
+      grid-template-columns: 1fr;
+    }
+    .stat-card {
+      max-width: none;
+    }
+  }
+</style>

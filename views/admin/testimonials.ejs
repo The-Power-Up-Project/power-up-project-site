@@ -1,0 +1,86 @@
+<%- include('include/_adminHeader') -%>
+
+<!-- Modals --->
+<div id="addModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeAddModal">&times;</span>
+    <h2>Add New Testimonial</h2>
+    <form id="addTestimonial">
+      <div>
+        <label for="partner">Partner:</label><br>
+        <select id="partner" name="partnerId" required>
+          <% partners.forEach(partner => { %>
+            <option value="<%= partner._id %>"><%= partner.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div>
+        <label for="content">Content: </label><br>
+        <input type="text" id="content" name="content" />
+      </div>
+      <button id="addTestimonialButton" type="submit">Add Testimonial</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="editModal">
+  <div class="modal-content">
+    <span class="close" id="closeEditModal">&times;</span>
+    <h2>Edit Testimonial</h2>
+    <form id="editTestimonialForm">
+      <input type="hidden" id="editTestimonialId" name="testimonialId" />
+      <div>
+        <label for="editPartner">Partner:</label><br>
+        <select id="editPartner" name="partnerId" required>
+          <% partners.forEach(partner => { %>
+            <option value="<%= partner._id %>"><%= partner.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div>
+        <label for="editContent">Content:</label><br>
+        <input type="text" id="editContent" name="editContent" required />
+      </div>
+      <button id="editTestimonialButton" type="submit">Edit Testimonial</button>
+    </form>
+  </div>
+</div>
+
+<div id="deleteModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeDeleteModal">&times;</span>
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete this testimonial?</p>
+    <input type="hidden" id="deleteTestimonialId" />
+    <button id="confirmDeleteButton">Yes, Delete</button>
+    <button id="cancelDeleteButton">Cancel</button>
+  </div>
+</div>
+<!-- Main Content --->
+<div class="container mt-4 text-center">
+  <h1>Admin - Testimonials</h1>
+  <button class="btn btn-success mb-3" id="openAddModal">Add New Testimonial</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Partner</th>
+        <th>Content</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% testimonials.forEach(testimonial => { %>
+        <tr data-id="<%= testimonial._id %>" data-partner="<%= testimonial.partner %>"data-partnerName="<%= testimonial.partnerName %>"data-content="<%= testimonial.content %>">
+          <td><%= testimonial.partnerName %></td>
+          <td><%= testimonial.content %></td>
+          <td>
+            <button class="btn btn-primary" onclick="editTestimonial('<%= testimonial._id %>')">Edit</button>
+            <button class="btn btn-danger" onclick="deleteTestimonial('<%= testimonial._id %>')">Delete</button>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<script src="/js/testimonials.js"></script>

@@ -1,0 +1,160 @@
+<%- include('include/_header') -%>
+
+<main class="leadership-main">
+  <section class="leadership-header">
+    <h1>Leadership Team</h1>
+    <p>Meet the dedicated individuals driving our mission to bridge the digital divide.</p>
+  </section>
+
+  <section class="leadership-section">
+    <div class="leadership-container">
+      <div class="executive-staff">
+        <h2>Executive Staff</h2>
+        <div class="members-grid">
+          <% members.filter(member => !member.advisoryBoard).forEach(member => { %>
+            <div class="member-card">
+              <img src="data:image/png;base64,<%= member.imageData.toString('base64') %>" alt="<%= member.name %>" class="member-image" />
+              <h3><%= member.name %></h3>
+              <p><%= member.position %></p>
+              <p><%= member.school %>, Class of <%= member.graduationYear %></p>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="advisory-board">
+        <h2>Advisory Board</h2>
+        <div class="members-grid">
+          <% members.filter(member => member.advisoryBoard).forEach(member => { %>
+            <div class="member-card">
+              <img src="data:image/png;base64,<%= member.imageData.toString('base64') %>" alt="<%= member.name %>" class="member-image" />
+              <h3><%= member.name %></h3>
+              <p><%= member.position %></p>
+              <p><%= member.school %>, Class of <%= member.graduationYear %></p>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('include/_footer') -%>
+
+<style>
+  .leadership-main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .leadership-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .leadership-header h1 {
+    font-size: 2.5rem;
+    color: #1490c7;
+    margin-bottom: 15px;
+  }
+
+  .leadership-header p {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .leadership-section {
+    margin-bottom: 60px;
+  }
+
+  .leadership-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .leadership-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #1490c7;
+    margin-bottom: 30px;
+  }
+
+  .members-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .executive-staff .members-grid {
+    grid-template-columns: 1fr; 
+  }
+
+  .advisory-board .members-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+  }
+  .executive-staff, .advisory-board {
+    background-color: #f0f0f0; 
+    border-radius: 12px; 
+    padding: 20px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  }
+
+  .member-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .member-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
+  }
+
+  .member-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+
+  .member-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  .member-card p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+  }
+
+  @media (max-width: 768px) {
+    .leadership-main {
+      padding: 20px 15px;
+    }
+    .leadership-header h1 {
+      font-size: 2rem;
+    }
+    .leadership-container {
+      gap: 20px;
+    }
+    .advisory-board .members-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .advisory-board .members-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

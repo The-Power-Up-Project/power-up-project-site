@@ -1,0 +1,110 @@
+<%- include('include/_header') -%>
+
+<main class="home-main">
+  <section class="hero">
+    <div class="hero-content">
+      <img src="/img/logo-horizontal-transp-white.png" alt="Power Up Project" class="hero-logo"/>
+      <p class="tagline">Changing the world, one computer at a time.</p>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Who Are We?</h2>
+    <p>The Power Up Project is a charitable organization founded by high school students in 2018. Our mission is to increase computer accessibility and decrease electronic waste.<br>With the generous contributions of our donors, members, and sponsors, we strive to improve the lives of those in need and better our community.</p>
+    <% if (galleryImages && galleryImages.length > 0) { %>
+      <div id="galleryCarousel" class="gallery-grid">
+        <% galleryImages.forEach(image => { %>
+          <div class="gallery-item">
+            <img src="data:image/jpeg;base64,<%= image.imageData.toString('base64') %>" alt="<%= image.name %>">
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+
+  <section class="home-section alt-bg">
+    <h2>What Do We Do?</h2>
+    <p>We refurbish donated computers and distribute them to organizations and individuals in need across Chicagoland. Our process is simple:</p>
+    <ul class="process-list">
+      <li>We accept computer donations from individuals and businesses.</li>
+      <li>Our team of volunteers refurbishes the computers, ensuring they are in good working condition.</li>
+      <li>We distribute the refurbished computers to local organizations and individuals who lack access to technology.</li>
+    </ul>
+    <% if (testimonials && testimonials.length > 0) { %>
+      <div id="testimonialCards" class="testimonial-container">
+        <% testimonials.forEach(testimonial => { %>
+          <div class="testimonial-card">
+            <p class="testimonial-content">"<%= testimonial.content %>"</p>
+            <p class="testimonial-author">- <%= testimonial.partnerName %></p>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+
+<section class="home-section alt-bg">
+  <h2>Get Involved</h2>
+  <p>There are many ways to support The Power Up Project:</p>
+  <ul class="involvement-list">
+    <li>
+      <div>
+        <strong>Donate:</strong> We accept donations of used computers, laptops, and tablets. Your old devices can make a big difference in someone's life.
+      </div>
+      <a href="/donate" class="btn">Donate Now</a>
+    </li>
+    <li>
+      <div>
+        <strong>Volunteer:</strong> Join our team of dedicated volunteers who help with computer refurbishment, distribution, and community outreach.
+      </div>
+      <a href="/join" class="btn">Join Our Team</a>
+    </li>
+    <li><strong>Spread the Word:</strong> Follow us on social media and share our mission with your network to help us reach more people in need.</li>
+  </ul>
+</section>
+
+<% if (recentBlogs && recentBlogs.length > 0) { %>
+  <section class="home-section alt-bg">
+    <h2>Recent News</h2>
+      <div id="recentBlogs" class="blog-container">
+        <% recentBlogs.forEach(blog => { %>
+          <a href="/blog/<%= blog._id %>" class="blog-card">
+            <div class="blog-card-content">
+              <h3><%= blog.title %></h3>
+              <p><%= blog.content.substring(0, 100) %>...</p>
+              <span class="blog-card-date"><%= new Date(blog.date).toLocaleDateString() %></span>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+    </section>
+  <% } %>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const gallery = document.getElementById('galleryCarousel');
+    if (gallery) {
+      const items = gallery.querySelectorAll('.gallery-item');
+      if (items.length > 1) {
+        let currentIndex = 0;
+        items[currentIndex].classList.add('active');
+
+        setInterval(() => {
+          const nextIndex = (currentIndex + 1) % items.length;
+          
+          items[nextIndex].classList.add('active');
+          
+          setTimeout(() => {
+            items[currentIndex].classList.remove('active');
+            currentIndex = nextIndex;
+          }, 1000); 
+
+        }, 3000); 
+      } else if (items.length === 1) {
+        items[0].classList.add('active');
+      }
+    }
+  });
+</script>
+
+<%- include('include/_footer') -%>
