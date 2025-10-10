@@ -42,13 +42,13 @@ app.use(
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Serve static files from the 'assets' directory
-app.use(express.static(path.join(__dirname, "assets")));
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, "public")));
 
 // load assets
-app.use("/css", express.static("assets/css"));
-app.use("/img", express.static("assets/img"));
-app.use("/js", express.static("assets/js"));
+app.use("/css", express.static("public/css"));
+app.use("/img", express.static("public/img"));
+app.use("/js", express.static("public/js"));
 
 // app.use takes a function that is added to the chain of a request.
 //  when we call next(), it goes to the next function in the chain.
