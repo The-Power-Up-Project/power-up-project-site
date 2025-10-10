@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Power Up Project</title>
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../shared.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Insert your additional CSS here */
+    @font-face {
+      font-family: "Selawik";
+      src: url("../selawk.ttf") format("truetype");
+      font-weight: normal;
+    }
+
+    @font-face {
+      font-family: "Selawik";
+      src: url("../selawksb.ttf") format("truetype");
+      font-weight: 600;
+    }
+
+    @font-face {
+      font-family: "Selawik";
+      src: url("../selawksl.ttf") format("truetype");
+      font-weight: 300;
+    }
+
+    @font-face {
+      font-family: "Selawik";
+      src: url("../selawkl.ttf") format("truetype");
+      font-weight: 100;
+    }
+
+    /* CSS for the donation form section */
+    #donate-header {
+      font-size: 5vh;
+      font-weight: 600;
+      color: #0096C7;
+      margin: 14.5vh 0 0 0;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+
+    #donate-subheader {
+      font-size: 2.5vh;
+      color: #333;
+      margin: 1vh 0 1vh 0;
+      display: inline-block;
+    }
+
+    #donate-form-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      #donate-form-container {
+        padding: 0 30px;
+      }
+    }
+
+    #donate-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    #donate-form > input, select, textarea {
+      border: 0.25vh solid #0096C7;
+      border-radius: 1vh;
+      width: 90%;
+      font-size: 3vh;
+      font-family: Selawik;
+      padding: 0.5vh 0.5vw;
+      margin: 1.5vh 0;
+      color: #333;
+    }
+
+    #submit {
+      background-color: #0096c7;
+      color: white !important;
+      width: 30% !important;
+    }
+
+    #donate-form > textarea {
+      resize: none;
+      font-size: 2.5vh;
+      height: 15vh;
+    }
+
+    @media (orientation: portrait) {
+      #donate-form-container {
+        margin: 0 7vw 0 7vw;
+      }
+
+      #donate-form > input, select, textarea {
+        width: 100%;
+        padding: 0.5vh 2vw;
+        font-size: 2vh;
+      }
+
+      #donate-form > textarea {
+        font-size: 1.5vh;
+      }
+
+      #submit {
+        width: 50% !important;
+      }
+
+      #donate-form-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    }
+
+    /* New styles for the embedded Google Form */
+    #donate-form-container iframe {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border: none;
+      margin-top: 2vh;
+      margin-bottom: 2vh;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 1vh;
+    }
+
+    @media (min-width: 768px) {
+      #donate-form-container iframe {
+        height: 70vh;
+      }
+    }
+
+    @media (orientation: portrait) {
+      #donate-form-container iframe {
+        height: 60vh;
+      }
+    }
+
+    #faq-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 0 auto;
+      max-width: 800px;
+      padding-top: 1.5rem;
+    }
+
+    #faq-container > div {
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    #faq-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+  </style>
+  <script>
+    // Insert your JavaScript code here
+    // If you have any scripts to include
+  </script>
+</head>
+<body>
+  <div id="donate-form-container" class="page light">
+    <h1 id="donate-header">Fill out this form to donate devices!</h1>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSexNT9PPToPT9RKfan8AAH_CYtm_a1xqfj0CwUjnaBXBldgnw/viewform?embedded=true" width="640" height="1066" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+  </div>
+
+  <div id="footer">
+    <p id="copyright">© 2023 The Power Up Project, a 501(c)(3) organization</p>
+    <p id="EIN">EIN: 85-1457486</p>
+    <div id="social-container">
+      <a href="https://www.facebook.com/thepowerupproj/"><img src="../images/facebook.png"></a>
+      <a href="https://www.instagram.com/thepowerupproject/"><img src="../images/instagram.png"></a>
+    </div>
+    <a id="email" href="mailto:thepowerupproj@gmail.com">thepowerupproj@gmail.com</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<html>
+  <head>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="style.css">
+    <title>The Power Up Project</title>
+  </head>
+  <body>
+    <div id="navbar" class="dark">
+      <a href="../index.html"><img id="nav-logo" src="../images/logo-icon-white.png" alt="Power Up Project Logo"></a>
+      <a href="../index.html">Home</a>
+      <a href="../donate/index.html">Donate</a>
+      <a href="../leadership/index.html">Leadership</a>
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Impact</a>
+        <div class="dropdown-content">
+          <a href="../blog/index.html">Blog</a>
+          <a href="../dashboard/index.html">Dashboard</a>
+        </div>
+      </div>
+    </div>
+    
+    <div id="blog-container" class="page light">
+      <div id="dashboard-container">
+        <h1 id="dashboard-header">Our Impact (YTD)</h1>
+        <div class="metrics-bg">
+          <div class="dashboard-grid metrics">
+            <div class="metric-card">
+              <div class="metric-icon">🖥️</div>
+              <div class="metric-value">255</div>
+              <div class="metric-label">Computers Donated</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon">📱</div>
+              <div class="metric-value">121</div>
+              <div class="metric-label">Phones Donated</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon">💸</div>
+              <div class="metric-value">$60,000+</div>
+              <div class="metric-label">in Electronics Donated</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon">
+                <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;display:block;margin:0 auto;"><rect x="7" y="12" width="40" height="24" rx="4" fill="#0096C7"/><rect x="17" y="38" width="20" height="4" rx="2" fill="#0096C7"/><rect x="22" y="44" width="10" height="3" rx="1.5" fill="#0096C7"/></svg>
+              </div>
+              <div class="metric-value">232</div>
+              <div class="metric-label">Monitors Donated</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon">📦</div>
+              <div class="metric-value">412</div>
+              <div class="metric-label">Computers Collected</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid orgs">
+          <div class="dashboard-section collapsed" id="helped-section">
+            <h2>Who We've Helped</h2>
+            <ul class="organization-list">
+              <li>The Lyte Collective</li>
+              <li>Compudot</li>
+              <li>Compudopt</li>
+              <li>World Relief Chicagoland</li>
+              <li>Midtown Metro</li>
+              <li>By the Hands Club</li>
+              <li>Warren Township Center</li>
+              <li>Plant Chicago</li>
+              <li>Families Help Families Chicagoland</li>
+              <li>Naperville Youth Club</li>
+              <li>Childhood Cancer Warriors</li>
+              <li>Community Access Naperville</li>
+              <li>Boys and Girls Club Elgin</li>
+              <li>Literacy DuPage</li>
+              <li>Corazon Community Services</li>
+              <li>Simplee Destinee Youth Center</li>
+              <li>Alive Center</li>
+              <li>HOPE Technology and Education Center</li>
+              <li>RefugeeOne</li>
+            </ul>
+            <div class="org-dropdown" onclick="toggleOrgSection('helped-section')">
+              <span>Show All</span>
+              <span class="org-arrow">▼</span>
+            </div>
+          </div>
+          <div class="dashboard-section collapsed" id="supports-section">
+            <h2>Who Supports Us</h2>
+            <ul class="organization-list">
+              <li>Sevan Multi-Site Solutions</li>
+              <li>Advanced Data Technologies</li>
+              <li>Brandenburg Industrial Service</li>
+              <li>St. Charles Public Library</li>
+              <li>Aurora Public Library</li>
+              <li>5 Point Solutions</li>
+              <li>Waident Technology Solutions</li>
+              <li>Indian Prairie School District 204</li>
+            </ul>
+            <div class="org-dropdown" onclick="toggleOrgSection('supports-section')">
+              <span>Show All</span>
+              <span class="org-arrow">▼</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-section gallery">
+          <div class="gallery-grid">
+            <div class="gallery-item"><img src="../images/metro1.JPG" alt="Metro photo 1" onclick="openGalleryModal(this)"></div>
+            <div class="gallery-item"><img src="../images/metro.JPG" alt="Metro photo 2" onclick="openGalleryModal(this)"></div>
+            <div class="gallery-item"><img src="../images/indianprairie.jpeg" alt="Indian Prairie School District donation" onclick="openGalleryModal(this)"></div>
+            <div class="gallery-item"><img src="../images/owen1.jpg" alt="Owen and Jonathan working on computers" onclick="openGalleryModal(this)"></div>
+            <div class="gallery-item"><img src="../images/stockpile.jpg" alt="Room full of computers" onclick="openGalleryModal(this)"></div>
+            <div class="gallery-item"><img src="../images/handschicago.jpeg" alt="Hands Chicago event" onclick="openGalleryModal(this)"></div>
+          </div>
+          <div class="gallery-modal" id="gallery-modal" onclick="closeGalleryModal(event)">
+            <span class="gallery-modal-close" onclick="closeGalleryModal(event)">&times;</span>
+            <img id="gallery-modal-img" src="" alt="Enlarged gallery image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p id="copyright">© 2025 The Power Up Project, a 501(c)(3) organization</p>
+      <p id="EIN">EIN: 85-1457486</p>
+      <div id="social-container">
+        <a href="https://www.facebook.com/thepowerupproj/"><img src="../images/facebook.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/thepowerupproject/"><img src="../images/instagram.png" alt="Instagram"></a>
+      </div>
+      <a id="email" href="mailto:thepowerupproj@gmail.com">thepowerupproj@gmail.com</a>
+    </div>
+    <script src="script.js"></script>
+    <script>
+    function toggleOrgSection(id) {
+      const section = document.getElementById(id);
+      const dropdown = section.querySelector('.org-dropdown span');
+      section.classList.toggle('expanded');
+      section.classList.toggle('collapsed');
+      if (section.classList.contains('expanded')) {
+        dropdown.textContent = 'Show Less';
+      } else {
+        dropdown.textContent = 'Show All';
+      }
+    }
+    function openGalleryModal(img) {
+      const modal = document.getElementById('gallery-modal');
+      const modalImg = document.getElementById('gallery-modal-img');
+      modalImg.src = img.src;
+      modalImg.alt = img.alt;
+      modal.classList.add('active');
+    }
+    function closeGalleryModal(event) {
+      if (event.target.classList.contains('gallery-modal') || event.target.classList.contains('gallery-modal-close')) {
+        document.getElementById('gallery-modal').classList.remove('active');
+      }
+    }
+    </script>
+  </body>
+</html>
+
+

@@ -1,0 +1,217 @@
+#phrase-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  width: 100%;
+  padding: 20vh 6vw;
+}
+
+#phrase-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  filter: brightness(60%);
+  object-fit: cover;
+}
+
+.text-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.text-image-container > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10vh 6vw;
+  text-align: center;
+}
+
+#who-container,
+#recent-container,
+#join-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0096C7;
+  width: 100%;
+  padding: 5vh 6vw;
+}
+
+#instagram-feed-container {
+  width: 100%;
+  max-width: 800px; /* Increase this value to make the embed wider */
+  margin: 0 auto;
+  text-align: center;
+}
+
+#instagram-feed-container .instagram-media {
+  max-width: 100% !important;
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+#instagram-text-container {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+  #instagram-feed-container {
+    max-width: 90%;
+  }
+}
+
+#whitespace {
+  background-color: white;
+  margin-top: 5%;
+}
+
+#join-button {
+  background-color: white;
+  border-radius: 2vh;
+  padding: 25px 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #0096C7;
+  text-decoration: none;
+  margin: 50px 0;
+  text-align: center;
+}
+
+.text-image-container.dark {
+  color: white;
+}
+
+.text-image-container.light {
+  color: #0096C7;
+}
+
+.text-image-container > div > h1 {
+  font-size: 4.5vh;
+  margin: 0 0 3vh 0;
+  width: 100%;
+}
+
+.text-image-container > div > p {
+  font-family: Selawik;
+  font-size: 3vh;
+  margin: 0;
+  font-weight: 100;
+  width: 100%;
+}
+
+.text-image-container > div > img {
+  width: 100%;
+  border-radius: 2vh;
+}
+
+.img-container {
+  min-width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+#phrase-logo {
+  height: 30vh;
+  padding: 2vh 1vw;
+  border-radius: 2vh;
+  z-index: 2;
+  background-color: transparent;
+}
+
+#phrase-text {
+  margin: 2vh 0 0 0;
+  color: white;
+  font-size: 5.5vh;
+  font-weight: normal;
+  text-align: center;
+  z-index: 1;
+  text-shadow: 0 0 10px #333;
+}
+
+@media (max-width: 768px) {
+  .text-image-container > div {
+    width: 100%;
+  }
+
+  #phrase-container {
+    padding: 10vh 3vw;
+  }
+
+  #join-button {
+    width: 80%;
+    padding: 20px 40px;
+    font-size: 1.5em;
+  }
+
+  #phrase-text {
+    font-size: 4.5vh;
+  }
+
+  .text-image-container > div > h1 {
+    font-size: 4vh;
+  }
+
+  .text-image-container > div > p {
+    font-size: 2.5vh;
+  }
+
+  #phrase-logo {
+    height: 20vh;
+    width: 80%;
+  }
+}
+
+@media (orientation: portrait) {
+  #who-container {
+    flex-direction: column;
+  }
+
+  #what-container {
+    flex-direction: column-reverse;
+  }
+
+  .text-image-container > div {
+    padding: 1vh 6vw 6vh 6vw;
+  }
+
+  #who-container > div:first-child {
+    padding-top: 14vh;
+  }
+
+  #what-container > div:last-child {
+    padding-top: 14vh;
+  }
+
+  #phrase-logo {
+    height: auto;
+    width: 80%;
+  }
+
+  .text-image-container > div > p {
+    font-size: 2.7vh;
+  }
+
+  #phrase-text {
+    font-size: 4vh;
+    margin-top: 3vh;
+  }
+}
