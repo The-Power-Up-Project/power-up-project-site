@@ -20,11 +20,13 @@ connectDB();
 
 // import the express-session module, which is used to manage sessions
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   })
 );
 
