@@ -69,9 +69,8 @@ app.all("*", (req, res) => {
   res.render("404");
 });
 
-// start the server on port PORT_NUM from .env file
-app.listen(process.env.PORT_NUM, () => {
-  console.log(
-    "server is listening on http://localhost:" + process.env.PORT_NUM
-  );
+const PORT = process.env.PORT || process.env.PORT_NUM || 6767;
+
+app.listen(PORT, () => {
+  console.log("server is listening on http://localhost:" + PORT);
 });
