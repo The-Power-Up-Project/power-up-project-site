@@ -73,6 +73,22 @@
             document.body.classList.remove('no-scroll');
           }
         });
+        
+        // Dropdown functionality for desktop
+        const dropbtn = document.querySelector('.dropbtn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        
+        dropbtn.addEventListener('click', () => {
+          dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        window.addEventListener('click', (e) => {
+          if (!e.target.matches('.dropbtn')) {
+            if (dropdownContent.style.display === 'block') {
+              dropdownContent.style.display = 'none';
+            }
+          }
+        });
       });
     </script>
   </body>

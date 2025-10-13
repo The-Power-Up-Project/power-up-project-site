@@ -9,8 +9,6 @@
   </section>
 
   <section class="home-section">
-    <h2>Who Are We?</h2>
-    <p>The Power Up Project is a charitable organization founded by high school students in 2018. Our mission is to increase computer accessibility and decrease electronic waste.<br>With the generous contributions of our donors, members, and sponsors, we strive to improve the lives of those in need and better our community.</p>
     <% if (galleryImages && galleryImages.length > 0) { %>
       <div id="galleryCarousel" class="gallery-grid">
         <% galleryImages.forEach(image => { %>
@@ -20,9 +18,11 @@
         <% }) %>
       </div>
     <% } %>
+    
   </section>
-
   <section class="home-section alt-bg">
+    <h2>Who Are We?</h2>
+    <p>The Power Up Project is a charitable organization founded by high school students in 2018. Our mission is to increase computer accessibility and decrease electronic waste.<br>With the generous contributions of our donors, members, and sponsors, we strive to improve the lives of those in need and better our community.</p>
     <h2>What Do We Do?</h2>
     <p>We refurbish donated computers and distribute them to organizations and individuals in need across Chicagoland. Our process is simple:</p>
     <ul class="process-list">
@@ -30,6 +30,8 @@
       <li>Our team of volunteers refurbishes the computers, ensuring they are in good working condition.</li>
       <li>We distribute the refurbished computers to local organizations and individuals who lack access to technology.</li>
     </ul>
+  </section>
+  <section class="home-section alt-bg">
     <% if (testimonials && testimonials.length > 0) { %>
       <div id="testimonialCards" class="testimonial-container">
         <% testimonials.forEach(testimonial => { %>
