@@ -11,7 +11,20 @@
   <body>
     <span>
       <header>
-        <nav>
+        <!-- Hamburger button for mobile -->
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        
+        <!-- Centered logo for mobile -->
+        <a href="/" class="mobile-logo">
+          <img src="/img/logo-icon-blue.png" alt="Power Up Project Logo" />
+        </a>
+        
+        <!-- Desktop nav -->
+        <nav class="desktop-nav">
           <a href="/"
             ><img src="/img/logo-icon-blue.png" alt="Power Up Project Logo"
           /></a>
@@ -27,22 +40,39 @@
             </div>
           </div>
         </nav>
+        
+        <!-- Mobile nav overlay -->
+        <nav id="mobile-nav" class="mobile-nav">
+          <a href="/">Home</a>
+          <a href="/admin/blogs">Blogs</a>
+          <a href="/admin/stats">Impact Stats</a>
+          <a href="/admin/testimonials">Testimonials</a>
+          <a href="/admin/partners">Partners</a>
+          <a href="/admin/members">Members</a>
+          <a href="/admin/images">Images</a>
+        </nav>
       </header>
     </span>
+    <!-- JavaScript for hamburger toggle -->
     <script>
-      document.querySelector(".dropbtn").addEventListener("click", function () {
-        const content = document.querySelector(".dropdown-content");
-        content.style.display =
-          content.style.display === "block" ? "none" : "block";
-      });
-
-      window.addEventListener("click", function (e) {
-        if (!e.target.matches(".dropbtn")) {
-          const content = document.querySelector(".dropdown-content");
-          if (content.style.display === "block") {
-            content.style.display = "none";
+      document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobile-nav');
+        
+        hamburger.addEventListener('click', () => {
+          mobileNav.classList.toggle('active');
+          hamburger.classList.toggle('active');
+          document.body.classList.toggle('no-scroll');
+        });
+        
+        // Close menu when a link is clicked
+        mobileNav.addEventListener('click', (e) => {
+          if (e.target.tagName === 'A') {
+            mobileNav.classList.remove('active');
+            hamburger.classList.remove('active');
+            document.body.classList.remove('no-scroll');
           }
-        }
+        });
       });
     </script>
   </body>

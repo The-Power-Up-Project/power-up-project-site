@@ -10,7 +10,20 @@
   <body>
     <span>
       <header>
-        <nav>
+        <!-- Hamburger button for mobile -->
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        
+        <!-- Centered logo for mobile -->
+        <a href="/" class="mobile-logo">
+          <img src="/img/logo-icon-blue.png" alt="Home" />
+        </a>
+        
+        <!-- Desktop nav -->
+        <nav class="desktop-nav">
           <a href="/"
             ><img src="/img/logo-icon-blue.png" alt="Home"
           /></a>
@@ -19,7 +32,39 @@
           <a href="/impact">Impact</a>
           <a href="/leadership">Leadership</a>
         </nav>
+        
+        <!-- Mobile nav overlay -->
+        <nav id="mobile-nav" class="mobile-nav">
+          <a href="/">Home</a>
+          <a href="/blog">Blog</a>
+          <a href="/donate">Donate</a>
+          <a href="/impact">Impact</a>
+          <a href="/leadership">Leadership</a>
+        </nav>
       </header>
     </span>
+    
+    <!-- JavaScript for hamburger toggle -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobile-nav');
+        
+        hamburger.addEventListener('click', () => {
+          mobileNav.classList.toggle('active');
+          hamburger.classList.toggle('active');
+          document.body.classList.toggle('no-scroll');
+        });
+        
+        // Close menu when a link is clicked
+        mobileNav.addEventListener('click', (e) => {
+          if (e.target.tagName === 'A') {
+            mobileNav.classList.remove('active');
+            hamburger.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
