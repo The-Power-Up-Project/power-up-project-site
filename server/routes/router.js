@@ -292,19 +292,20 @@ route.post("/admin/blogs/add", async (req, res) => {
   if (!title || !content) {
     return res.status(400).send("Title and content are required");
   }
+  let imageId = null;
   if (imageData) {
-    imageData = Buffer.from(imageData, "base64");
-    image = new Image({
+    const image = new Image({
       name: `Blog Image - ${title}`,
-      imageData,
+      imageData: Buffer.from(imageData, "base64"),
     });
     await image.save();
+    imageId = image._id;
   }
   const newBlog = new Blog({
     title,
     content,
     date: date ? new Date(date) : Date.now(),
-    image: imageData ? image._id : null,
+    image: imageId,
     partners,
   });
   await newBlog.save();
