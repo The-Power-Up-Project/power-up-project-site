@@ -6,8 +6,24 @@
     <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/css/style.css" />
     <title>The Power Up Project</title>
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/main.css"></noscript>
+
+    <style>
+      html,body{height:100%}
+      body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+      .page{opacity:0;transition:opacity .18s ease-in}
+      .page.ready{opacity:1}
+      #loading-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;z-index:9999}
+      #loading-overlay .spinner{width:36px;height:36px;border:4px solid #e6e6e6;border-top-color:#333;border-radius:50%;animation:spin .8s linear infinite}
+      @keyframes spin{to{transform:rotate(360deg)}}
+      .leader-photo{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}
+    </style>
   </head>
   <body>
+    <div id="loading-overlay" aria-hidden="true">
+      <div class="spinner" role="status" aria-label="Loading"></div>
+    </div>
     <span>
       <header>
         <!-- Hamburger button for mobile -->
@@ -43,28 +59,54 @@
         </nav>
       </header>
     </span>
-    
-    <!-- JavaScript for hamburger toggle -->
-    <script>
+    <div class="page">
+      <script>
+      // keep page hidden until main.css actually finishes applying
+      function finishLoading(){
+        const overlay = document.getElementById('loading-overlay');
+        const page = document.querySelector('.page');
+        if(page) page.classList.add('ready');
+        if(overlay) overlay.remove();
+      }
+
+      // Wait specifically for the preload link for /css/main.css to load.
+      const preloadMain = document.querySelector('link[rel="preload"][as="style"][href="/css/main.css"]');
+
+      if (preloadMain) {
+        // If browser already switched it to stylesheet, finish immediately
+        if (preloadMain.rel === 'stylesheet') {
+          finishLoading();
+        } else {
+          // Wait for the preload -> stylesheet load event. The inline onload in the tag sets rel='stylesheet'
+          preloadMain.addEventListener('load', () => {
+            // small delay to allow browser to apply CSS
+            setTimeout(finishLoading, 100);
+          });
+          // Fallback: final fallback on window load
+          window.addEventListener('load', () => setTimeout(finishLoading, 100));
+        }
+      } else {
+        // No preload found: fallback to window load
+        window.addEventListener('load', () => setTimeout(finishLoading, 100));
+      }
+
+      // navigation behavior (attach after DOM ready)
       document.addEventListener('DOMContentLoaded', () => {
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobile-nav');
-        
-        hamburger.addEventListener('click', () => {
-          mobileNav.classList.toggle('active');
-          hamburger.classList.toggle('active');
-          document.body.classList.toggle('no-scroll');
-        });
-        
-        // Close menu when a link is clicked
-        mobileNav.addEventListener('click', (e) => {
-          if (e.target.tagName === 'A') {
-            mobileNav.classList.remove('active');
-            hamburger.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-          }
-        });
+        if (hamburger && mobileNav) {
+          hamburger.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+          });
+          mobileNav.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+              mobileNav.classList.remove('active');
+              hamburger.classList.remove('active');
+              document.body.classList.remove('no-scroll');
+            }
+          });
+        }
       });
     </script>
-  </body>
-</html>
