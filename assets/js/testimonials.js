@@ -144,8 +144,8 @@ function setupTestimonialTicker() {
     if (!track.dataset.duplicated || track.dataset.duplicated !== 'true') {
       track.innerHTML = baseHtml + baseHtml;
       track.dataset.duplicated = 'true';
-      // set starting position to the duplicated upper half so animation runs top->bottom
-      track.style.transform = 'translateY(-50%)';
+      // set initial position to 0 so the track scrolls upwards (bottom-to-top)
+      track.style.transform = 'translateY(0)';
     }
     const originalHeight = track.scrollHeight / 2; // height of a single duplicated set
     const durationSec = Math.max(6, Math.round(originalHeight / speedPxPerSec));

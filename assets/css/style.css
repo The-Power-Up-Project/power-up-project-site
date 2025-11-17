@@ -581,8 +581,8 @@ header {
     }
 
 @keyframes tickerScroll {
-  0% { transform: translateY(-50%); }
-  100% { transform: translateY(0); }
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
     }
 
 /* A helper class to enable the animation — JS will set duration dynamically */

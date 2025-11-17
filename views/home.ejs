@@ -306,8 +306,7 @@
       if (!track.dataset.duplicated || track.dataset.duplicated !== 'true') {
         track.innerHTML = baseHTML + baseHTML;
         track.dataset.duplicated = 'true';
-        // set starting position to the duplicated upper half so animation runs top->bottom
-        track.style.transform = 'translateY(-50%)';
+        track.style.transform = 'translateY(0)';
       }
       const originalHeight = track.scrollHeight / 2;
       const pxPerSec = 35;
