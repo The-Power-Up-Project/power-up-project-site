@@ -40,6 +40,32 @@
         <% } %>
       </div>
     <% } %>
+
+    <% if (testimonials && testimonials.length > 0) { %>
+      <div id="testimonialCards" class="testimonial-container" aria-label="Testimonials">
+        <div class="testimonial-ticker" aria-hidden="true">
+          <div class="testimonial-track" role="list">
+        <% testimonials.forEach(testimonial => { %>
+          <div class="testimonial-card" role="listitem">
+            <p class="testimonial-content">"<%= testimonial.content %>"</p>
+            <p class="testimonial-author">- <%= testimonial.partnerName %></p>
+          </div>
+        <% }) %>
+          </div>
+        </div>
+          </div>
+        </div>
+        <!-- screen-reader friendly static list -->
+        <div class="sr-only" aria-hidden="false">
+          <div role="list">
+            <% testimonials.forEach(testimonial => { %>
+              <div role="listitem">"<%= testimonial.content %>" — <%= testimonial.partnerName %></div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    <% } %>
+
   </section>
   <section class="home-section alt-bg">
     <h2>Who Are We?</h2>
@@ -52,18 +78,7 @@
       <li>We distribute the refurbished computers to local organizations and individuals who lack access to technology.</li>
     </ul>
   </section>
-  <section class="home-section alt-bg">
-    <% if (testimonials && testimonials.length > 0) { %>
-      <div id="testimonialCards" class="testimonial-container">
-        <% testimonials.forEach(testimonial => { %>
-          <div class="testimonial-card">
-            <p class="testimonial-content">"<%= testimonial.content %>"</p>
-            <p class="testimonial-author">- <%= testimonial.partnerName %></p>
-          </div>
-        <% }) %>
-      </div>
-    <% } %>
-  </section>
+  
 
 <section class="home-section alt-bg">
   <h2>Get Involved</h2>
@@ -255,6 +270,63 @@
       resizeTimer = setTimeout(positionItems, 220);
     });
     window.addEventListener('orientationchange', () => setTimeout(positionItems, 300));
+  })();
+
+  // Testimonial ticker (home page only)
+  (function setupHomeTestimonialTicker() {
+    const ticker = document.querySelector('.testimonial-ticker');
+    if (!ticker) return;
+    const track = ticker.querySelector('.testimonial-track');
+    if (!track) return;
+
+    // Respect reduced-motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery.matches) return;
+
+    if (!track.dataset.baseHtml) track.dataset.baseHtml = track.innerHTML;
+    const baseHTML = track.dataset.baseHtml || '';
+    if (!baseHTML.trim()) return;
+    // start with single copy so we can measure properly
+    track.innerHTML = baseHTML;
+
+    function update() {
+      track.classList.remove('ticker-animate');
+      track.style.animationDuration = '';
+      const tickerHeight = ticker.clientHeight;
+      const baseHeight = track.scrollHeight; // height of a single set
+      if (baseHeight <= tickerHeight) {
+        // no need to animate
+        track.innerHTML = baseHTML;
+        track.classList.remove('ticker-animate');
+        track.style.animationDuration = '';
+        track.style.transform = '';
+        return;
+      }
+      // duplicate if not already duplicated
+      if (!track.dataset.duplicated || track.dataset.duplicated !== 'true') {
+        track.innerHTML = baseHTML + baseHTML;
+        track.dataset.duplicated = 'true';
+        // set starting position to the duplicated upper half so animation runs top->bottom
+        track.style.transform = 'translateY(-50%)';
+      }
+      const originalHeight = track.scrollHeight / 2;
+      const pxPerSec = 35;
+      const duration = Math.max(6, Math.round(originalHeight / pxPerSec));
+      track.style.animationDuration = duration + 's';
+      // trigger animation
+      track.classList.add('ticker-animate');
+    }
+
+    // Pause on hover
+    ticker.addEventListener('mouseenter', () => { track.style.animationPlayState = 'paused'; });
+    ticker.addEventListener('mouseleave', () => { track.style.animationPlayState = 'running'; });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(update, 150);
+    });
+    update();
   })();
 </script>
 <%- include('include/_footer') -%>
