@@ -395,6 +395,51 @@ header {
   .gallery-scatter .gallery-item .pin-photo { top: -6px; width: 16px; height: 16px; }
 }
 
+/* Mobile: Make gallery-scatter a vertical stacked list and show only first two images */
+@media (max-width: 768px) {
+  .gallery-scatter {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    padding: 16px 10px;
+    min-height: auto;
+  }
+  .gallery-scatter .gallery-item {
+    position: relative; /* keep relative so pin-photo can be anchored */
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important; /* let frame width follow content */
+    max-width: none; /* don't force same width on all frames */
+    margin: 0 auto;
+    text-align: center; /* center inline-block inner */
+    display: block;
+  }
+  .gallery-scatter .gallery-item .inner {
+    height: auto !important;
+    padding: 12px 14px !important; /* increase padding slightly so frame is larger */
+    display: inline-block !important; /* fit frame to image width */
+    text-align: center;
+    vertical-align: middle;
+    width: auto !important; /* do not force 100% for mobile */
+    max-width: 90vw !important; /* allow the frame to expand to almost full viewport */
+    box-sizing: border-box;
+  }
+  .gallery-scatter .gallery-item .pin-photo {
+    display: block !important;
+    width: 14px !important;
+    height: 14px !important;
+    top: -6px !important;
+    left: 50% !important;
+    transform: translateX(-50%) rotate(-6deg) !important;
+    pointer-events: none !important;
+  }
+  .gallery-scatter .gallery-item img { max-width: 100%; height: auto; }
+  /* only show first two items */
+  .gallery-scatter .gallery-item:nth-child(n+3) { display: none; }
+}
+
 /* subtle floating animation applied to items (kept separate from absolute transforms) */
 @keyframes scatterFloat {
   0%   { transform: translateY(0); }
@@ -603,8 +648,10 @@ header {
 }
 
 @media (max-width: 480px) {
-  .testimonial-ticker { height: 260px; }
+  .testimonial-ticker { height: 320px; }
   .testimonial-ticker .testimonial-track .testimonial-card { width: calc(100% - 30px); }
+  /* For small phones, make images a bit larger inside stack as well */
+  .gallery-scatter .gallery-item .inner { max-width: 96vw !important; padding: 12px !important; }
 }
 
 .testimonial-author {

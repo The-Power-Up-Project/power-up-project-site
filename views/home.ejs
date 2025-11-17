@@ -153,6 +153,38 @@
       container.style.height = ch + 'px';
 
       const placed = [];
+
+      // Mobile: if small screen, stop the scatter logic and show only 2 images stacked vertically.
+      if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+        // allow css to render items in normal flow; clear inline positioning styles
+        container.style.height = 'auto';
+        items.forEach((item, idx) => {
+          // show only first two items
+          if (idx >= 2) {
+            item.style.display = 'none';
+          } else {
+            item.style.display = '';
+            // clear scatter positioning and sizing applied by JS
+            item.style.left = '';
+            item.style.top = '';
+            item.style.width = '';
+            item.style.height = '';
+            item.style.transform = '';
+            item.style.zIndex = '';
+            const inner = item.querySelector('.inner');
+            if (inner) {
+              // Re-enable float for mobile so the visible items have subtle motion
+              if (Math.random() > 0.4) {
+                inner.classList.add('float');
+                inner.style.animationDelay = (Math.random() * 1.5) + 's';
+              }
+            }
+          }
+        });
+        return;
+      }
+      // ensure items are visible on desktop (clears any display:none we set for mobile)
+      items.forEach(item => { item.style.display = ''; });
       // padding around elements (in px) to avoid two items visually touching
       const paddingMargin = 12;
 
