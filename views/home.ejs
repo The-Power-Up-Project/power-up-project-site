@@ -10,15 +10,36 @@
 
   <section class="home-section">
     <% if (galleryImages && galleryImages.length > 0) { %>
-      <div id="galleryCarousel" class="gallery-grid">
-        <% galleryImages.forEach(image => { %>
-          <div class="gallery-item">
-            <img src="data:image/jpeg;base64,<%= image.imageData.toString('base64') %>" alt="<%= image.name %>">
+      <div class="bulletin-board">
+        <div id="galleryScatter" class="gallery-scatter">
+        <% galleryImages.forEach((image, idx) => { %>
+          <div class="gallery-item" data-idx="<%= idx %>">
+            <span class="pin pin-photo" aria-hidden="true"></span>
+            <div class="inner">
+              <img src="data:image/jpeg;base64,<%= image.imageData.toString('base64') %>" alt="<%= image.name %>">
+            </div>
           </div>
         <% }) %>
+        </div>
+        <% if (recentBlogs && recentBlogs.length > 0) { %>
+          <div class="recent-news-wrapper">
+            <h2>Recent News</h2>
+            <div id="recentBlogs" class="blog-container bulletin-recent">
+            <% recentBlogs.forEach(blog => { %>
+              <a href="/blog/<%= blog._id %>" class="blog-card">
+                <span class="pin pin-note" aria-hidden="true"></span>
+                <div class="blog-card-content">
+                  <h3><%= blog.title %></h3>
+                  <p><%= blog.content.substring(0, 100) %>...</p>
+                  <span class="blog-card-date"><%= new Date(blog.date).toLocaleDateString() %></span>
+                </div>
+              </a>
+            <% }) %>
+            </div>
+          </div>
+        <% } %>
       </div>
     <% } %>
-    
   </section>
   <section class="home-section alt-bg">
     <h2>Who Are We?</h2>
@@ -64,49 +85,176 @@
   </ul>
 </section>
 
-<% if (recentBlogs && recentBlogs.length > 0) { %>
-  <section class="home-section alt-bg">
-    <h2>Recent News</h2>
-      <div id="recentBlogs" class="blog-container">
-        <% recentBlogs.forEach(blog => { %>
-          <a href="/blog/<%= blog._id %>" class="blog-card">
-            <div class="blog-card-content">
-              <h3><%= blog.title %></h3>
-              <p><%= blog.content.substring(0, 100) %>...</p>
-              <span class="blog-card-date"><%= new Date(blog.date).toLocaleDateString() %></span>
-            </div>
-          </a>
-        <% }) %>
-      </div>
-    </section>
-  <% } %>
+  
 </main>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const gallery = document.getElementById('galleryCarousel');
-    if (gallery) {
-      const items = gallery.querySelectorAll('.gallery-item');
-      if (items.length > 1) {
-        let currentIndex = 0;
-        items[currentIndex].classList.add('active');
+  (function () {
+    const container = document.getElementById('galleryScatter');
+    const recentEl = document.getElementById('recentBlogs');
+    if (!container) return;
 
-        setInterval(() => {
-          const nextIndex = (currentIndex + 1) % items.length;
-          
-          items[nextIndex].classList.add('active');
-          
-          setTimeout(() => {
-            items[currentIndex].classList.remove('active');
-            currentIndex = nextIndex;
-          }, 1000); 
+    const items = Array.from(container.querySelectorAll('.gallery-item'));
 
-        }, 3000); 
-      } else if (items.length === 1) {
-        items[0].classList.add('active');
-      }
+    // wait for all images to load
+    const imgs = items.map(it => it.querySelector('img'));
+    Promise.all(imgs.map(img => new Promise(res => {
+      if (img.complete) return res();
+      img.addEventListener('load', res);
+      img.addEventListener('error', res);
+    }))).then(positionItems);
+
+    // simple rectangle overlap checker
+    function overlaps(a, b) {
+      return !(a.left + a.w < b.left || b.left + b.w < a.left || a.top + a.h < b.top || b.top + b.h < a.top);
     }
-  });
-</script>
+    
+      // style the recent news notes: random rotate and slight background offsets for variety
+      function styleNewsNotes() {
+        const news = document.getElementById('recentBlogs');
+        if (!news) return;
+        const notes = Array.from(news.querySelectorAll('.blog-card'));
+        notes.forEach((note, idx) => {
+          // apply small random rotation between -6 and 6 degrees
+          const rot = (Math.random() * 12) - 6;
+          note.style.transform = `rotate(${rot}deg)`;
+          note.style.zIndex = 300 + idx;
+        });
+      }
+      // initial style
+      styleNewsNotes();
+      window.addEventListener('resize', () => {
+        // keep news notes fairly upright on very small screens
+        setTimeout(styleNewsNotes, 120);
+      });
 
+    function positionItems() {
+      const cw = container.clientWidth;
+      // choose a container height relative to viewport for more scatter room,
+      // leaving room for the recent news section at the bottom of the bulletin board
+      const rawCh = Math.max(window.innerHeight * 0.75, 520);
+      const reserved = (recentEl && recentEl.offsetHeight) ? recentEl.offsetHeight + 18 : 140;
+      const ch = Math.max(260, rawCh - reserved);
+      container.style.height = ch + 'px';
+
+      const placed = [];
+      // padding around elements (in px) to avoid two items visually touching
+      const paddingMargin = 12;
+
+      items.forEach(item => {
+        const img = item.querySelector('img');
+        const naturalW = img.naturalWidth || img.width;
+        const naturalH = img.naturalHeight || img.height;
+        const cssMaxW = parseInt(getComputedStyle(img).maxWidth) || Math.min(320, cw * 0.35);
+        const cssMaxH = parseInt(getComputedStyle(img).maxHeight) || 260;
+
+        let iw = naturalW;
+        let ih = naturalH;
+        const scale = Math.min(1, cssMaxW / iw, cssMaxH / ih);
+        iw = Math.round(iw * scale);
+        ih = Math.round(ih * scale);
+
+        // account for gallery-item padding (box-sizing: border-box) and inner frame padding
+        const itemStyles = getComputedStyle(item);
+        const padX = parseInt(itemStyles.paddingLeft || 0) + parseInt(itemStyles.paddingRight || 0);
+        const padY = parseInt(itemStyles.paddingTop || 0) + parseInt(itemStyles.paddingBottom || 0);
+        const innerEl = item.querySelector('.inner');
+        const innerStyles = innerEl ? getComputedStyle(innerEl) : null;
+        const innerPadX = innerStyles ? (parseInt(innerStyles.paddingLeft || 0) + parseInt(innerStyles.paddingRight || 0)) : 0;
+        const innerPadY = innerStyles ? (parseInt(innerStyles.paddingTop || 0) + parseInt(innerStyles.paddingBottom || 0)) : 0;
+        const cardScale = 1.5;
+        const cardW = Math.round((iw + padX + innerPadX) * cardScale);
+        const cardH = Math.round((ih + padY + innerPadY) * cardScale);
+        item.style.width = cardW + 'px';
+        item.style.height = cardH + 'px';
+
+        // Try to place items with minimal overlap. We progressively allow small
+        // overlaps if we can't find a no-overlap spot after many tries.
+        let attempts = 0;
+        let left = 0, top = 0;
+        const maxAttempts = 360; // allow more tries to find a non-overlapping spot
+        const attemptStep = 30; // attempts before allowing more overlap
+        const allowedThresholds = [0, 0.005, 0.015, 0.03]; // stricter overlap thresholds (up to 3%)
+        let thresholdIndex = 0;
+        let allowed = allowedThresholds[thresholdIndex];
+        // Keep track of the best spot found (least overlap) as fallback if no spot meets the allowed threshold
+        let bestSpot = { left: 0, top: 0, worst: Infinity };
+
+        function overlapArea(a, b) {
+          // pad rects by paddingMargin to create a visual buffer space
+          const ax1 = a.left - paddingMargin;
+          const ay1 = a.top - paddingMargin;
+          const ax2 = a.left + a.w + paddingMargin;
+          const ay2 = a.top + a.h + paddingMargin;
+          const bx1 = b.left - paddingMargin;
+          const by1 = b.top - paddingMargin;
+          const bx2 = b.left + b.w + paddingMargin;
+          const by2 = b.top + b.h + paddingMargin;
+          const xOverlap = Math.max(0, Math.min(ax2, bx2) - Math.max(ax1, bx1));
+          const yOverlap = Math.max(0, Math.min(ay2, by2) - Math.max(ay1, by1));
+          return xOverlap * yOverlap;
+        }
+
+        function overlapRatio(a, b) {
+          const area = a.w * a.h;
+          const barea = b.w * b.h;
+          const overlap = overlapArea(a, b);
+          if (overlap === 0) return 0;
+          // Use smaller area to be conservative (overlap / smaller piece)
+          return overlap / Math.min(area, barea);
+        }
+
+        do {
+          left = Math.round(Math.random() * Math.max(0, cw - cardW));
+          top  = Math.round(Math.random() * Math.max(0, ch - cardH));
+          attempts++;
+          const rect = { left, top, w: cardW, h: cardH };
+          // find the worst overlap (relative to the smaller element) across all placed items
+          const worstOverlap = placed.reduce((max, p) => Math.max(max, overlapRatio(rect, p)), 0);
+          // remember the best (least-overlap) spot
+          if (worstOverlap < bestSpot.worst) {
+            bestSpot.left = left;
+            bestSpot.top = top;
+            bestSpot.worst = worstOverlap;
+          }
+          if (worstOverlap <= allowed) break;
+          if (attempts % attemptStep === 0 && thresholdIndex < allowedThresholds.length - 1) {
+            thresholdIndex++;
+            allowed = allowedThresholds[thresholdIndex];
+          }
+        } while (attempts < maxAttempts);
+
+        // if we exhausted attempts, use the best spot found (least overlap) as a fallback
+        const finalRect = { left, top, w: iw, h: ih };
+        if (attempts >= maxAttempts) {
+          left = bestSpot.left;
+          top = bestSpot.top;
+        }
+
+        placed.push({ left, top, w: cardW, h: cardH });
+
+        const rotate = (Math.random() * 20) - 10; 
+        // Position the element absolute using left/top and set rotation separately.
+        item.style.left = left + 'px';
+        item.style.top = top + 'px';
+        item.style.transform = `rotate(${rotate}deg)`;
+        item.style.zIndex = 10 + Math.floor(Math.random() * 50);
+        item.style.zIndex = 10 + Math.floor(Math.random() * 50);
+
+        const inner = item.querySelector('.inner');
+        if (inner && Math.random() > 0.2) {
+          inner.classList.add('float');
+          inner.style.animationDelay = (Math.random() * 2) + 's';
+        }
+      });
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(positionItems, 220);
+    });
+    window.addEventListener('orientationchange', () => setTimeout(positionItems, 300));
+  })();
+</script>
 <%- include('include/_footer') -%>

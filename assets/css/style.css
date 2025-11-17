@@ -4,6 +4,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background: #d3d3d3;
 }
 
 body.no-scroll {
@@ -322,37 +323,168 @@ header {
   max-width: 800px;
   margin: 0 auto 20px auto;
 }
-
-/* Gallery */
-.gallery-grid {
+/* Gallery (scattered/floating layout — images keep their own sizes) */
+.gallery-scatter {
   position: relative;
   width: 100%;
-  max-width: 800px; 
-  height: 450px; 
+  max-width: 1200px;
   margin: 30px auto;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
+  padding: 0 10px;
+  min-height: 500px;
+  overflow: visible;
 }
 
-.gallery-item {
+/* Bulletin board aesthetic when applied to scattered gallery */
+.bulletin-board, .gallery-scatter.bulletin, .gallery-scatter.bulletin-board {
+  background-color: #d2b68a;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(30,15,5,0.06) 0 2%, transparent 6%),
+    radial-gradient(circle at 45% 60%, rgba(0,0,0,0.03) 0 3%, transparent 8%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 6px),
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  background-blend-mode: multiply, multiply, normal, normal;
+  background-size: 200px 200px, 120px 120px, 20px 20px, auto;
+  border-radius: 10px;
+  padding: 22px 12px 140px 12px; /* bottom padding to make room for recent news */
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03), 0 8px 36px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.gallery-scatter .gallery-item {
   position: absolute;
-  top: 0;
+  will-change: transform;
   left: 0;
+  top: 0;
+  transition: transform 700ms cubic-bezier(.2,.9,.2,1), box-shadow 300ms;
+  background: transparent;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  padding: 6px;
+  box-sizing: border-box;
+  display: block;
+  pointer-events: auto;
+  transform-origin: center center;
+  }
+
+/* hover lift for bulletin board polaroids */
+.gallery-scatter.bulletin .gallery-item .inner:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.2);
+}
+
+/* allow images to keep native aspect ratio but limit extreme sizes */
+.gallery-scatter .gallery-item img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 320px;      /* max width for very large images */
+  max-height: 260px;     /* max height */
+  border-radius: 6px;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* small screens: reduce max sizes */
+@media (max-width: 768px) {
+  .gallery-scatter .gallery-item img {
+    max-width: 180px;
+    max-height: 160px;
+  }
+  .gallery-scatter .gallery-item .inner { padding: 12px; }
+  .gallery-scatter .gallery-item .pin-photo { top: -6px; width: 16px; height: 16px; }
+}
+
+/* subtle floating animation applied to items (kept separate from absolute transforms) */
+@keyframes scatterFloat {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+.gallery-scatter .gallery-item .inner {
+  display: block;
+  background: #fff;
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08) inset;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  z-index: 1;
+  transition: transform 250ms cubic-bezier(.2,.9,.2,1), box-shadow 200ms;
+  cursor: pointer;
 }
-
-.gallery-item.active {
-  opacity: 1;
-  z-index: 2;
+.gallery-scatter .gallery-item .inner img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
-
-.gallery-item img {
+.gallery-scatter .gallery-item .inner.float {
+  animation: scatterFloat 6s ease-in-out infinite;
+}
+/* small thumbtack on top left of photo */
+.gallery-scatter .gallery-item .pin-photo {
+  position: absolute;
+  left: 50%;
+  top: -8px; /* slightly above the top of the white frame */
+  transform: translateX(-50%) rotate(-6deg);
+  width: 20px;
+  height: 20px;
+  z-index: 1000;
+  pointer-events: none;
+}
+.gallery-scatter .gallery-item .pin-photo::before {
+  content: '';
+  display: block;
   width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #fff 0 2px, #ff3b3b 5px, #b20000 60%);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+.gallery-scatter .gallery-item .pin-photo::after { /* little metal head highlight */
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  width: 2px;
+  height: 8px;
+  background: rgba(0,0,0,0.15);
+  transform: translateX(-50%) rotate(-15deg);
+  border-radius: 1px;
+}
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 10px;
+  align-items: start;
+}
+
+.gallery-grid .gallery-item {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.15);
+  transition: transform .25s, box-shadow .25s;
+  animation: floaty 6s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.15s);
+}
+
+.gallery-grid .gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+.gallery-grid .gallery-item img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 /* Process List */
 .process-list {
@@ -497,10 +629,19 @@ header {
   font-size: 0.9rem;
   color: #777;
 }
-
+/* gentle floating animation */
+@keyframes floaty {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
 @media (max-width: 768px) {
-  .gallery-item {
-    flex-basis: calc(50% - 10px);
+  .gallery-grid .gallery-item {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .gallery-grid .gallery-item img {
+    height: 140px;
   }
   .home-section h2 {
     font-size: 2rem;
@@ -508,8 +649,12 @@ header {
 }
 
 @media (max-width: 480px) {
-  .gallery-item {
-    flex-basis: 100%;
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .gallery-grid .gallery-item {
+    animation-duration: 5.5s;
   }
   .hero {
     padding: 40px 15px;
@@ -733,4 +878,66 @@ header {
   .blog-post-content {
     font-size: 1rem;
   }
+}
+
+/* Bulletin wrapper container styles */
+.bulletin-board {
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto;
+  position: relative;
+}
+
+.bulletin-board .blog-container {
+  /* keep blog container styling but ensure it sits at the bottom of the board */
+  margin-top: 12px;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
+/* Style blog cards inside the bulletin board to look like sticky notes */
+.bulletin-recent .blog-card {
+  position: relative;
+  background: linear-gradient(180deg, #fff9b8 0%, #fff6a8 100%);
+  color: #222;
+  border-radius: 4px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  border: 1px solid rgba(0,0,0,0.06);
+  flex-basis: 260px;
+  max-width: 260px;
+  min-height: 120px;
+  text-decoration: none;
+  transform-origin: center center;
+}
+.bulletin-recent .blog-card .blog-card-content { padding: 8px 6px; }
+.bulletin-recent .blog-card h3 { margin-bottom: 8px; }
+.bulletin-recent .blog-card p { margin-bottom: 8px; color: #222; }
+.bulletin-recent .blog-card .blog-card-date { color: #555; }
+
+/* Tape/pin element at top center */
+.bulletin-recent .blog-card .pin-note {
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  display: block;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #fff 0 2px, #ff5d5d 3px, #b30000 80%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  pointer-events: none;
+}
+
+/* Alternate subtle colors on different notes for variety */
+.bulletin-recent .blog-card:nth-child(3n+1) { background: linear-gradient(180deg,#fff8b8,#fff6a8); }
+.bulletin-recent .blog-card:nth-child(3n+2) { background: linear-gradient(180deg,#ffdcd6,#ffd6c6); }
+.bulletin-recent .blog-card:nth-child(3n+3) { background: linear-gradient(180deg,#d6f3ff,#cfeeff); }
+
+.bulletin-recent .blog-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.22); }
+
+@media (max-width: 768px) {
+  .bulletin-recent .blog-card { width: 100%; max-width: none; flex-basis: 100%; }
+  .bulletin-recent .blog-card .pin-note { top: -8px; width: 16px; height: 16px; }
 }
