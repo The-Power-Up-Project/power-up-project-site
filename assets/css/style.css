@@ -323,6 +323,20 @@ header {
   max-width: 800px;
   margin: 0 auto 20px auto;
 }
+
+/* Center headings and text for 'About' section only */
+.home-section .about h2,
+.home-section .about .process-list {
+  text-align: center;
+}
+.home-section .about .process-list {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px; /* slightly wider for centered list */
+}
+.home-section .about .process-list li {
+  text-align: center;
+}
 /* Gallery (scattered/floating layout — images keep their own sizes) */
 .gallery-scatter {
   position: relative;
@@ -667,28 +681,34 @@ header {
   padding: 0;
   max-width: 800px;
   margin: 30px auto;
-  text-align: left;
+    text-align: center; /* center content inside Get Involved */
 }
 
 .involvement-list li {
   margin-bottom: 20px;
   display: flex;
-  justify-content: space-between;
+    justify-content: center; /* center buttons inline */
   align-items: center;
-  gap: 20px;
+  gap: 12px;
+  flex-direction: column; /* stack text above the button and center them */
 }
 
 .btn {
-  display: inline-block;
+    display: inline-flex;
   background-color: #1490c7;
   color: #fff;
-  padding: 10px 20px;
+  padding: 12px 26px;
+  font-size: 1.1rem; /* larger button text */
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
   margin-top: 10px;
   transition: background-color 0.3s;
   flex-shrink: 0;
+}
+.btn { 
+  justify-content: center; 
+  align-items: center; 
 }
 
 .btn:hover {
@@ -703,6 +723,36 @@ header {
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 30px;
+}
+
+/* Get Involved CTAs */
+.get-involved-cta {
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  align-items:center;
+  margin-top: 12px;
+}
+.get-involved-cta a.btn {
+  padding: 14px 32px;
+  font-size: 1.2rem;
+}
+@media (max-width: 480px) {
+  .get-involved-cta { flex-direction: column; gap: 12px; }
+  .get-involved-cta a.btn { width: 80%; max-width: 300px; }
+}
+
+/* Center the Get Involved header and description */
+.get-involved {
+  text-align: center;
+}
+.get-involved h2 {
+  margin-bottom: 12px;
+}
+.get-involved p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px;
 }
 
 .blog-card {
