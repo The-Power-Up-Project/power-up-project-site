@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const route = express.Router();
 const Image = require("../model/image");
 const Member = require("../model/member");
@@ -80,6 +81,24 @@ route.get("/login", (req, res) => {
     return res.redirect("/admin/stats");
   }
   res.render("login");
+});
+
+route.get("/auth/google", (req, res, next) => {
+  passport.authenticate('google', { scope: ['profile', 'email'] })(req, res, next);
+});
+
+// only grant admin if email is "powerupproj@gmail.com"
+route.get("/auth/google/callback", (req, res, next) => {
+  passport.authenticate('google', { failureRedirect: '/login' }, (err, user) => {
+    if (err || !user) {
+      return res.redirect('/login');
+    }
+    if (user.emails[0].value !== "powerupproj@gmail.com") {
+      return res.redirect('/login');
+    }
+    req.session.Admin = true;
+    res.redirect("/admin/stats");
+  })(req, res, next);
 });
 
 route.post("/login", (req, res) => {
