@@ -112,14 +112,6 @@ route.get("/auth/google/callback", (req, res, next) => {
   })(req, res, next);
 });
 
-route.post("/login", (req, res) => {
-  const { password } = req.body;
-  if (password === process.env.ADMIN_PASSWORD) {
-    req.session.Admin = true;
-  }
-  res.redirect("/admin/stats");
-});
-
 route.get("/admin/images", async (req, res) => {
   const images = await Image.find()
   res.render("admin/images", { images });
