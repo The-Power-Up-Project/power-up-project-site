@@ -74,6 +74,10 @@ route.get("/leadership", async (req, res) => {
   }
 });
 
+route.get("/privacy", (req, res) => {
+  res.render("privacy");
+});
+
 // Admin routes
 route.get("/login", (req, res) => {
   if (req.session.Admin) {
