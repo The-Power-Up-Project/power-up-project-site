@@ -83,7 +83,7 @@ app.use(async (req, res, next) => {
   if (!req.path.startsWith("/admin") || req.path === "/login") {
     return next();
   }
-  if (req.session && req.session.Admin) {
+  if (req.session && req.session.email && req.session.Admin) {
     return next();
   }
   res.redirect("/login");
