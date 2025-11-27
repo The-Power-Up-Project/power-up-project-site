@@ -8,12 +8,13 @@ Setup:
 2. Create .env file in the root directory (/power-up-project-site):
 
 ```
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 SESSION_SECRET=create-a-session-secret (https://randomkeygen.com/)
 ADMIN_PASSWORD=
 PORT_NUM=XXXX (ex: 8080)
-MONGO_URI=Ask Jack
+MONGO_URI=
 ```
-
 3. Open a terminal in the root directory (/power-up-project-site) and run:
 
 ```
