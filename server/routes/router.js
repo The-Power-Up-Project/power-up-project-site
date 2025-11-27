@@ -91,16 +91,19 @@ route.get("/auth/google", (req, res, next) => {
   passport.authenticate('google', { scope: ['profile', 'email'] })(req, res, next);
 });
 
-// only grant admin if email is "powerupproj@gmail.com"
+// only grant admin if email is "thepowerupproj@gmail.com"
 route.get("/auth/google/callback", (req, res, next) => {
   passport.authenticate('google', { failureRedirect: '/login' }, (err, user) => {
     if (err || !user) {
+      console.log(err);
       return res.redirect('/login');
     }
-    if (user.emails[0].value !== "powerupproj@gmail.com") {
+    if (user.emails[0].value !== "thepowerupproj@gmail.com") {
+      console.log("Unauthorized email:", user.emails[0].value);
       return res.redirect('/login');
     }
     req.session.Admin = true;
+    console.log("Admin logged in with Google account:", user.emails[0].value);
     res.redirect("/admin/stats");
   })(req, res, next);
 });
