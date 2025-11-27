@@ -102,9 +102,13 @@ route.get("/auth/google/callback", (req, res, next) => {
       console.log("Unauthorized email:", user.emails[0].value);
       return res.redirect('/login');
     }
-    req.session.Admin = true;
-    console.log("Admin logged in with Google account:", user.emails[0].value);
-    res.redirect("/admin/stats");
+    if (user.emails[0].value === "thepowerupproj@gmail.com"){
+      req.session.Admin = true;
+      req.session.email = user.emails[0].value;
+      console.log("Admin logged in with Google account:", user.emails[0].value);
+      res.redirect("/admin/stats");
+    }
+    
   })(req, res, next);
 });
 
