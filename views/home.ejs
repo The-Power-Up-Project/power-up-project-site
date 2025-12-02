@@ -27,7 +27,6 @@
             <div id="recentBlogs" class="blog-container bulletin-recent">
             <% recentBlogs.forEach(blog => { %>
               <a href="/blog/<%= blog._id %>" class="blog-card">
-                <span class="pin pin-note" aria-hidden="true"></span>
                 <div class="blog-card-content">
                   <h3><%= blog.title %></h3>
                   <p><%= blog.content.substring(0, 100) %>...</p>
