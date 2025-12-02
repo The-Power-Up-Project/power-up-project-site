@@ -135,10 +135,8 @@
       // leaving room for the recent news section at the bottom of the bulletin board
       const rawCh = Math.max(window.innerHeight * 0.75, 520);
       const reserved = (recentEl && recentEl.offsetHeight) ? recentEl.offsetHeight + 18 : 140;
-      const ch = Math.max(260, rawCh - reserved);
+      const ch = Math.max(260, rawCh - reserved) + 80;
       container.style.height = ch + 'px';
-
-      const placed = [];
 
       // Mobile: if small screen, stop the scatter logic and show only 2 images stacked vertically.
       if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
@@ -171,15 +169,19 @@
       }
       // ensure items are visible on desktop (clears any display:none we set for mobile)
       items.forEach(item => { item.style.display = ''; });
-      // padding around elements (in px) to avoid two items visually touching
-      const paddingMargin = 12;
 
-      items.forEach(item => {
+      const cols = 4;
+      const rows = Math.ceil(items.length / cols);
+      const colWidth = cw / cols;
+      const rowHeight = ch / Math.max(2, rows); 
+
+      const itemData = items.map((item, i) => {
         const img = item.querySelector('img');
         const naturalW = img.naturalWidth || img.width;
         const naturalH = img.naturalHeight || img.height;
-        const cssMaxW = parseInt(getComputedStyle(img).maxWidth) || Math.min(320, cw * 0.35);
-        const cssMaxH = parseInt(getComputedStyle(img).maxHeight) || 260;
+        
+        const cssMaxW = Math.min(250, colWidth * 0.85);
+        const cssMaxH = parseInt(getComputedStyle(img).maxHeight) || 220;
 
         let iw = naturalW;
         let ih = naturalH;
@@ -187,7 +189,6 @@
         iw = Math.round(iw * scale);
         ih = Math.round(ih * scale);
 
-        // account for gallery-item padding (box-sizing: border-box) and inner frame padding
         const itemStyles = getComputedStyle(item);
         const padX = parseInt(itemStyles.paddingLeft || 0) + parseInt(itemStyles.paddingRight || 0);
         const padY = parseInt(itemStyles.paddingTop || 0) + parseInt(itemStyles.paddingBottom || 0);
@@ -195,90 +196,88 @@
         const innerStyles = innerEl ? getComputedStyle(innerEl) : null;
         const innerPadX = innerStyles ? (parseInt(innerStyles.paddingLeft || 0) + parseInt(innerStyles.paddingRight || 0)) : 0;
         const innerPadY = innerStyles ? (parseInt(innerStyles.paddingTop || 0) + parseInt(innerStyles.paddingBottom || 0)) : 0;
-        const cardScale = 1.5;
-        const cardW = Math.round((iw + padX + innerPadX) * cardScale);
-        const cardH = Math.round((ih + padY + innerPadY) * cardScale);
-        item.style.width = cardW + 'px';
-        item.style.height = cardH + 'px';
+        
+        const baseW = iw + padX + innerPadX;
+        const baseH = ih + padY + innerPadY;
+        
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const centerX = (col * colWidth) + (colWidth / 2);
+        let centerY = (row * rowHeight) + (rowHeight / 2);
 
-        // Try to place items with minimal overlap. We progressively allow small
-        // overlaps if we can't find a no-overlap spot after many tries.
-        let attempts = 0;
-        let left = 0, top = 0;
-        const maxAttempts = 360; // allow more tries to find a non-overlapping spot
-        const attemptStep = 30; // attempts before allowing more overlap
-        const allowedThresholds = [0, 0.005, 0.015, 0.03]; // stricter overlap thresholds (up to 3%)
-        let thresholdIndex = 0;
-        let allowed = allowedThresholds[thresholdIndex];
-        // Keep track of the best spot found (least overlap) as fallback if no spot meets the allowed threshold
-        let bestSpot = { left: 0, top: 0, worst: Infinity };
-
-        function overlapArea(a, b) {
-          // pad rects by paddingMargin to create a visual buffer space
-          const ax1 = a.left - paddingMargin;
-          const ay1 = a.top - paddingMargin;
-          const ax2 = a.left + a.w + paddingMargin;
-          const ay2 = a.top + a.h + paddingMargin;
-          const bx1 = b.left - paddingMargin;
-          const by1 = b.top - paddingMargin;
-          const bx2 = b.left + b.w + paddingMargin;
-          const by2 = b.top + b.h + paddingMargin;
-          const xOverlap = Math.max(0, Math.min(ax2, bx2) - Math.max(ax1, bx1));
-          const yOverlap = Math.max(0, Math.min(ay2, by2) - Math.max(ay1, by1));
-          return xOverlap * yOverlap;
+        if (rows > 1) {
+            const separation = 40;
+            centerY += (row < rows / 2) ? -separation : separation;
         }
+        
+        const rotate = (Math.random() * 16) - 8; 
 
-        function overlapRatio(a, b) {
-          const area = a.w * a.h;
-          const barea = b.w * b.h;
-          const overlap = overlapArea(a, b);
-          if (overlap === 0) return 0;
-          // Use smaller area to be conservative (overlap / smaller piece)
-          return overlap / Math.min(area, barea);
-        }
+        return {
+            item,
+            baseW,
+            baseH,
+            centerX,
+            centerY,
+            rotate
+        };
+      });
 
-        do {
-          left = Math.round(Math.random() * Math.max(0, cw - cardW));
-          top  = Math.round(Math.random() * Math.max(0, ch - cardH));
-          attempts++;
-          const rect = { left, top, w: cardW, h: cardH };
-          // find the worst overlap (relative to the smaller element) across all placed items
-          const worstOverlap = placed.reduce((max, p) => Math.max(max, overlapRatio(rect, p)), 0);
-          // remember the best (least-overlap) spot
-          if (worstOverlap < bestSpot.worst) {
-            bestSpot.left = left;
-            bestSpot.top = top;
-            bestSpot.worst = worstOverlap;
+      let globalScale = 1.0;
+      let iterations = 0;
+      const maxIterations = 10;
+
+      while (iterations < maxIterations) {
+          const rects = itemData.map(d => {
+              const w = d.baseW * globalScale;
+              const h = d.baseH * globalScale;
+              const rad = d.rotate * (Math.PI / 180);
+              const sin = Math.abs(Math.sin(rad));
+              const cos = Math.abs(Math.cos(rad));
+              const bboxW = w * cos + h * sin;
+              const bboxH = w * sin + h * cos;
+              const bboxLeft = d.centerX - (bboxW / 2);
+              const bboxTop = d.centerY - (bboxH / 2);
+              return { left: bboxLeft, top: bboxTop, w: bboxW, h: bboxH, area: w * h };
+          });
+
+          let maxOverlapPct = 0;
+          for (let i = 0; i < rects.length; i++) {
+              for (let j = i + 1; j < rects.length; j++) {
+                  const r1 = rects[i];
+                  const r2 = rects[j];
+                  const x_overlap = Math.max(0, Math.min(r1.left + r1.w, r2.left + r2.w) - Math.max(r1.left, r2.left));
+                  const y_overlap = Math.max(0, Math.min(r1.top + r1.h, r2.top + r2.h) - Math.max(r1.top, r2.top));
+                  const overlapArea = x_overlap * y_overlap;
+                  if (overlapArea > 0) {
+                      const pct1 = overlapArea / r1.area;
+                      const pct2 = overlapArea / r2.area;
+                      maxOverlapPct = Math.max(maxOverlapPct, pct1, pct2);
+                  }
+              }
           }
-          if (worstOverlap <= allowed) break;
-          if (attempts % attemptStep === 0 && thresholdIndex < allowedThresholds.length - 1) {
-            thresholdIndex++;
-            allowed = allowedThresholds[thresholdIndex];
+          if (maxOverlapPct < 0.10) break;
+          globalScale *= 0.9;
+          iterations++;
+      }
+
+      itemData.forEach((d, i) => {
+          const w = Math.round(d.baseW * globalScale);
+          const h = Math.round(d.baseH * globalScale);
+          const left = d.centerX - (w / 2);
+          const top = d.centerY - (h / 2);
+
+          d.item.style.width = w + 'px';
+          d.item.style.height = h + 'px';
+          d.item.style.left = left + 'px';
+          d.item.style.top = top + 'px';
+          d.item.style.transform = `rotate(${d.rotate}deg)`;
+          d.item.style.zIndex = 10 + i;
+
+          const inner = d.item.querySelector('.inner');
+          if (inner && Math.random() > 0.2) {
+            inner.classList.add('float');
+            inner.style.animationDelay = (Math.random() * 2) + 's';
           }
-        } while (attempts < maxAttempts);
-
-        // if we exhausted attempts, use the best spot found (least overlap) as a fallback
-        const finalRect = { left, top, w: iw, h: ih };
-        if (attempts >= maxAttempts) {
-          left = bestSpot.left;
-          top = bestSpot.top;
-        }
-
-        placed.push({ left, top, w: cardW, h: cardH });
-
-        const rotate = (Math.random() * 20) - 10; 
-        // Position the element absolute using left/top and set rotation separately.
-        item.style.left = left + 'px';
-        item.style.top = top + 'px';
-        item.style.transform = `rotate(${rotate}deg)`;
-        item.style.zIndex = 10 + Math.floor(Math.random() * 50);
-        item.style.zIndex = 10 + Math.floor(Math.random() * 50);
-
-        const inner = item.querySelector('.inner');
-        if (inner && Math.random() > 0.2) {
-          inner.classList.add('float');
-          inner.style.animationDelay = (Math.random() * 2) + 's';
-        }
       });
     }
 
