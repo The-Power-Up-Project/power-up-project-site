@@ -84,17 +84,12 @@
   }
 
   .members-grid {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
   }
 
-  .executive-staff .members-grid {
-    grid-template-columns: 1fr; 
-  }
-
-  .advisory-board .members-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-  }
   .executive-staff, .advisory-board {
     background-color: #f0f0f0; 
     border-radius: 12px; 
@@ -109,6 +104,8 @@
     padding: 20px;
     text-align: center;
     transition: transform 0.2s;
+    flex: 1 1 250px;
+    max-width: 320px;
   }
 
   .member-card:hover {
@@ -118,10 +115,10 @@
   }
 
   .member-image {
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 0;
     margin-bottom: 15px;
   }
 
@@ -147,14 +144,8 @@
     .leadership-container {
       gap: 20px;
     }
-    .advisory-board .members-grid {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
   }
 
   @media (max-width: 480px) {
-    .advisory-board .members-grid {
-      grid-template-columns: 1fr;
-    }
   }
 </style>
