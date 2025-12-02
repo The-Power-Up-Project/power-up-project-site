@@ -46,15 +46,16 @@
   <section class="home-section alt-bg">
     <div class="recent-testimonials">
       <h2>Recent Testimonials</h2>
-      <% for (const testimonial of testimonials) { %>
-        <div id="testimonial-card">
-          <h6>
-            <strong><%= testimonial.partnerName %></strong>
-          </h6>
-          <p><%= testimonial.content %></p>
-        </div>
-
-      <% }%>
+      <div class="testimonials-grid">
+        <% for (const testimonial of testimonials) { %>
+          <div class="testimonial-card">
+            <p><%= testimonial.content %></p>
+            <h3>
+              <strong><%= testimonial.partnerName %></strong>
+            </h3>
+          </div>
+        <% }%>
+      </div>
     </div>
   </section>
   <section class="home-section alt-bg">
