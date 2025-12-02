@@ -41,31 +41,21 @@
       </div>
     <% } %>
 
-    <% if (testimonials && testimonials.length > 0) { %>
-      <div id="testimonialCards" class="testimonial-container" aria-label="Testimonials">
-        <div class="testimonial-ticker" aria-hidden="true">
-          <div class="testimonial-track" role="list">
-        <% testimonials.forEach(testimonial => { %>
-          <div class="testimonial-card" role="listitem">
-            <p class="testimonial-content">"<%= testimonial.content %>"</p>
-            <p class="testimonial-author">- <%= testimonial.partnerName %></p>
-          </div>
-        <% }) %>
-          </div>
-        </div>
-          </div>
-        </div>
-        <!-- screen-reader friendly static list -->
-        <div class="sr-only" aria-hidden="false">
-          <div role="list">
-            <% testimonials.forEach(testimonial => { %>
-              <div role="listitem">"<%= testimonial.content %>" — <%= testimonial.partnerName %></div>
-            <% }) %>
-          </div>
-        </div>
-      </div>
-    <% } %>
+  </section>
 
+  <section class="home-section alt-bg">
+    <div class="recent-testimonials">
+      <h2>Recent Testimonials</h2>
+      <% for (const testimonial of testimonials) { %>
+        <div id="testimonial-card">
+          <h6>
+            <strong><%= testimonial.partnerName %></strong>
+          </h6>
+          <p><%= testimonial.content %></p>
+        </div>
+
+      <% }%>
+    </div>
   </section>
   <section class="home-section alt-bg">
     <div class="about">
