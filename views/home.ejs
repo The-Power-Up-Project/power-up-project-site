@@ -45,15 +45,31 @@
   <section class="home-section alt-bg">
     <div class="recent-testimonials">
       <h2>Recent Testimonials</h2>
-      <div class="testimonials-grid">
-        <% for (const testimonial of testimonials) { %>
-          <div class="testimonial-card">
-            <p><%= testimonial.content %></p>
-            <h3>
-              <strong><%= testimonial.partnerName %></strong>
-            </h3>
-          </div>
-        <% }%>
+      <div class="testimonials-carousel-wrapper">
+        <div class="testimonials-carousel" id="testimonialsCarousel">
+          <% for (const testimonial of testimonials) { %>
+            <div class="testimonial-card">
+              <p><%= testimonial.content %></p>
+              <h3>
+                <strong><%= testimonial.partnerName %></strong>
+              </h3>
+            </div>
+          <% }%>
+        </div>
+      </div>
+      <div class="testimonials-nav">
+        <button class="testimonial-arrow" id="testimonialPrev" aria-label="Previous testimonials">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round">
+            <line x1="5" y1="1" x2="5" y2="13"></line>
+            <polyline points="12 13 6 7 12 1"></polyline>
+          </svg>
+        </button>
+        <button class="testimonial-arrow" id="testimonialNext" aria-label="Next testimonials">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round">
+            <polyline points="2 13 8 7 2 1"></polyline>
+            <line x1="10" y1="1" x2="10" y2="13"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </section>
@@ -289,60 +305,73 @@
     window.addEventListener('orientationchange', () => setTimeout(positionItems, 300));
   })();
 
-  // Testimonial ticker (home page only)
-  (function setupHomeTestimonialTicker() {
-    const ticker = document.querySelector('.testimonial-ticker');
-    if (!ticker) return;
-    const track = ticker.querySelector('.testimonial-track');
-    if (!track) return;
+  // Testimonials Carousel
+  (function setupTestimonialsCarousel() {
+    const carousel = document.getElementById('testimonialsCarousel');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
+    if (!carousel || !prevBtn || !nextBtn) return;
 
-    // Respect reduced-motion preference
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mediaQuery.matches) return;
+    const cards = Array.from(carousel.querySelectorAll('.testimonial-card'));
+    const totalCards = cards.length;
+    let currentIndex = 0;
 
-    if (!track.dataset.baseHtml) track.dataset.baseHtml = track.innerHTML;
-    const baseHTML = track.dataset.baseHtml || '';
-    if (!baseHTML.trim()) return;
-    // start with single copy so we can measure properly
-    track.innerHTML = baseHTML;
-
-    function update() {
-      track.classList.remove('ticker-animate');
-      track.style.animationDuration = '';
-      const tickerHeight = ticker.clientHeight;
-      const baseHeight = track.scrollHeight; // height of a single set
-      if (baseHeight <= tickerHeight) {
-        // no need to animate
-        track.innerHTML = baseHTML;
-        track.classList.remove('ticker-animate');
-        track.style.animationDuration = '';
-        track.style.transform = '';
-        return;
-      }
-      // duplicate if not already duplicated
-      if (!track.dataset.duplicated || track.dataset.duplicated !== 'true') {
-        track.innerHTML = baseHTML + baseHTML;
-        track.dataset.duplicated = 'true';
-        track.style.transform = 'translateY(0)';
-      }
-      const originalHeight = track.scrollHeight / 2;
-      const pxPerSec = 35;
-      const duration = Math.max(6, Math.round(originalHeight / pxPerSec));
-      track.style.animationDuration = duration + 's';
-      // trigger animation
-      track.classList.add('ticker-animate');
+    function getVisibleCount() {
+      const width = window.innerWidth;
+      if (width <= 640) return 1;
+      if (width <= 1024) return 2;
+      return 3;
     }
 
-    // Pause on hover
-    ticker.addEventListener('mouseenter', () => { track.style.animationPlayState = 'paused'; });
-    ticker.addEventListener('mouseleave', () => { track.style.animationPlayState = 'running'; });
+    function updateCarousel() {
+      const visibleCount = getVisibleCount();
+      const maxIndex = Math.max(0, totalCards - visibleCount);
+
+      if (currentIndex > maxIndex) currentIndex = maxIndex;
+      if (currentIndex < 0) currentIndex = 0;
+
+      const gap = 30;
+      const cardWidth = cards[0] ? cards[0].offsetWidth : 0;
+      const offset = currentIndex * (cardWidth + gap);
+      carousel.style.transform = `translateX(-${offset}px)`;
+
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= maxIndex;
+
+      if (totalCards <= visibleCount) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+      } else {
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+      }
+    }
+
+    function navigate(direction) {
+      const visibleCount = getVisibleCount();
+      const maxIndex = Math.max(0, totalCards - visibleCount);
+
+      if (direction === 'next') {
+        const remaining = totalCards - currentIndex - visibleCount;
+        const step = remaining >= visibleCount ? visibleCount : Math.max(1, remaining);
+        currentIndex = Math.min(currentIndex + step, maxIndex);
+      } else {
+        const step = currentIndex >= visibleCount ? visibleCount : Math.max(1, currentIndex);
+        currentIndex = Math.max(currentIndex - step, 0);
+      }
+      updateCarousel();
+    }
+
+    prevBtn.addEventListener('click', () => navigate('prev'));
+    nextBtn.addEventListener('click', () => navigate('next'));
 
     let resizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(update, 150);
+      resizeTimer = setTimeout(updateCarousel, 150);
     });
-    update();
+
+    updateCarousel();
   })();
 </script>
 <%- include('include/_footer') -%>
