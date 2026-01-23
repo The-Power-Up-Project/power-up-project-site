@@ -316,7 +316,7 @@ body.has-hero {
   justify-content: center;
   align-items: center;
   
-  box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
+  box-shadow: inset 0 -10px 30px -10px rgba(20, 144, 199, 0.8);
 }
 
 .hero-content .hero-logo {
