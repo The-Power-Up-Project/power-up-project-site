@@ -15,11 +15,47 @@ header {
   background-color: #f0f0f0;
   padding: 10px 20px;
   box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
-  position: relative;
-  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header.transparent {
+  background-color: transparent;
+  box-shadow: none;
+  mix-blend-mode: difference;
+}
+
+header.transparent .desktop-nav a {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(20, 144, 199, 0.7);
+}
+
+header.transparent .desktop-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+header.transparent .desktop-nav img,
+header.transparent .mobile-logo img {
+  filter: brightness(0) invert(1);
+}
+
+header.transparent .hamburger-line {
+  background-color: #fff;
+}
+
+body {
+  padding-top: 60px;
+}
+
+body.has-hero {
+  padding-top: 0;
 }
 
 .desktop-nav {
@@ -275,7 +311,7 @@ header {
 .hero {
   background-color: #2f2f2f;
   color: #fff;
-  padding: 60px 20px;
+  padding: 120px 20px 60px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
