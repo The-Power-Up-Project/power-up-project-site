@@ -15,11 +15,47 @@ header {
   background-color: #f0f0f0;
   padding: 10px 20px;
   box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
-  position: relative;
-  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header.transparent {
+  background-color: transparent;
+  box-shadow: none;
+  mix-blend-mode: difference;
+}
+
+header.transparent .desktop-nav a {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(20, 144, 199, 0.7);
+}
+
+header.transparent .desktop-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+header.transparent .desktop-nav img,
+header.transparent .mobile-logo img {
+  filter: brightness(0) invert(1);
+}
+
+header.transparent .hamburger-line {
+  background-color: #fff;
+}
+
+body {
+  padding-top: 60px;
+}
+
+body.has-hero {
+  padding-top: 0;
 }
 
 .desktop-nav {
@@ -275,12 +311,12 @@ header {
 .hero {
   background-color: #2f2f2f;
   color: #fff;
-  padding: 60px 20px;
+  padding: 120px 20px 60px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   
-  box-shadow: 0 6px 20px -4px rgba(20, 144, 199, 0.8);
+  box-shadow: inset 0 -10px 30px -10px rgba(20, 144, 199, 0.8);
 }
 
 .hero-content .hero-logo {
@@ -305,7 +341,7 @@ header {
 .home-section.alt-bg {
   background-color: #f9f9f9;
   border-radius: 25px;
-  padding-top: 40px;
+  padding-top: 10px;
   padding-bottom: 40px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -343,12 +379,14 @@ header {
   width: 100%;
   max-width: 1200px;
   margin: 30px auto;
-  padding: 0 10px;
+  padding: 0 30px;
   min-height: 500px;
   overflow: visible;
   box-sizing: border-box;
 }
-
+.recent-news-wrapper {
+  margin-top: 75px;
+}
 /* Bulletin board aesthetic when applied to scattered gallery */
 .bulletin-board, .gallery-scatter.bulletin, .gallery-scatter.bulletin-board {
   background-color: #d2b68a;
@@ -993,6 +1031,66 @@ header {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 0.9rem;
+}
+
+/* Testimonials Carousel */
+.testimonials-carousel-wrapper {
+  overflow: hidden;
+  margin-top: 40px;
+  padding: 10px 0;
+  margin-bottom: -10px;
+}
+
+.testimonials-carousel {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.4s ease;
+}
+
+.testimonials-carousel .testimonial-card {
+  flex: 0 0 calc((100% - 60px) / 3);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.testimonials-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+
+.testimonial-arrow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: none;
+  border: none;
+  color: #1490c7;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+
+.testimonial-arrow:hover:not(:disabled) {
+  opacity: 0.7;
+}
+
+.testimonial-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .testimonials-carousel .testimonial-card {
+    flex: 0 0 calc((100% - 30px) / 2);
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials-carousel .testimonial-card {
+    flex: 0 0 100%;
+  }
 }
 
 @media (max-width: 768px) {

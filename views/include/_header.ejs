@@ -108,5 +108,25 @@
             }
           });
         }
+
+        // Transparent header over hero
+        const hero = document.querySelector('.hero');
+        const header = document.querySelector('header');
+        if (hero && header) {
+          document.body.classList.add('has-hero');
+
+          function updateHeader() {
+            const heroBottom = hero.getBoundingClientRect().bottom;
+            if (heroBottom > header.offsetHeight) {
+              header.classList.add('transparent');
+            } else {
+              header.classList.remove('transparent');
+            }
+          }
+
+          updateHeader();
+          window.addEventListener('scroll', updateHeader);
+          window.addEventListener('resize', updateHeader);
+        }
       });
     </script>
