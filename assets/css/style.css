@@ -305,7 +305,7 @@ header {
 .home-section.alt-bg {
   background-color: #f9f9f9;
   border-radius: 25px;
-  padding-top: 40px;
+  padding-top: 10px;
   padding-bottom: 40px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -343,12 +343,14 @@ header {
   width: 100%;
   max-width: 1200px;
   margin: 30px auto;
-  padding: 0 10px;
+  padding: 0 30px;
   min-height: 500px;
   overflow: visible;
   box-sizing: border-box;
 }
-
+.recent-news-wrapper {
+  margin-top: 75px;
+}
 /* Bulletin board aesthetic when applied to scattered gallery */
 .bulletin-board, .gallery-scatter.bulletin, .gallery-scatter.bulletin-board {
   background-color: #d2b68a;
